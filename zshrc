@@ -24,7 +24,10 @@ export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export NODE_COMPILE_CACHE="$XDG_CACHE_HOME/node"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npmrc"
 export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgreprc"
-export CLAUDE_CONFIG_DIR="$XDG_DATA_HOME/claude"
+
+if [ -d "$XDG_DATA_HOME/claude" ]; then
+  export CLAUDE_CONFIG_DIR="$XDG_DATA_HOME/claude"
+fi
 
 # Completion
 zstyle :compinstall filename "$HOME/.zshrc"
