@@ -7,9 +7,21 @@
   {
     "context": "Terminal",
     "bindings": {
-      "ctrl-s": ["terminal::SendKeystroke", "ctrl-s"],
+      "ctrl-s": [
+        "terminal::SendKeystroke",
+        "ctrl-s"
+      ],
       "ctrl-c": "terminal::Copy",
       "ctrl-v": "terminal::Paste"
+    }
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "shift-enter": [
+        "terminal::SendText",
+        "\u001b\r"
+      ]
     }
   }
 ]
