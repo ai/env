@@ -1,0 +1,4 @@
+if [ -z "$BASH_EXECED_ZSH" ] && [ -t 1 ] && command -v zsh >/dev/null 2>&1; then
+  export BASH_EXECED_ZSH=1
+  exec zsh -l
+fi
