@@ -98,18 +98,27 @@ if [ "$1" = "--up" ]; then
 
 elif [ "$1" = "--down" ]; then
   runtime=$(get_container_runtime)
-  container_id=$(get_container_id)
-  if [ "$container_id" == "" ]; then
+  folder_name=$(basename "$root" | tr '[:upper:]' '[:lower:]' | tr -cd '[:alnum:]')
+  label_ids=$($runtime ps -q --filter "label=devcontainer.local_folder=$root")
+  compose_ids=$($runtime ps -q --filter "label=com.docker.compose.project=${folder_name}devcontainer")
+  all_ids=$(printf '%s\n%s\n' "$label_ids" "$compose_ids" | sort -u | grep -v '^$')
+  if [ -z "$all_ids" ]; then
     echo "Container is not running"
   else
-    $runtime kill $container_id
+    $runtime kill $all_ids
   fi
 
 elif [ "$1" = "--rebuild" ]; then
   ~/Projects/environment/bin/dev --up
-  container_id=$(~/Projects/environment/bin/dev --down)
+  ~/Projects/environment/bin/dev --down > /dev/null
   runtime=$(get_container_runtime)
-  $runtime container rm $container_id
+  folder_name=$(basename "$root" | tr '[:upper:]' '[:lower:]' | tr -cd '[:alnum:]')
+  label_ids=$($runtime ps -aq --filter "label=devcontainer.local_folder=$root")
+  compose_ids=$($runtime ps -aq --filter "label=com.docker.compose.project=${folder_name}devcontainer")
+  all_ids=$(printf '%s\n%s\n' "$label_ids" "$compose_ids" | sort -u | grep -v '^$')
+  if [ -n "$all_ids" ]; then
+    $runtime container rm --force --depend $all_ids 2>/dev/null || $runtime container rm --force $all_ids
+  fi
   search_pattern="vsc-$(basename "$root")-[0-9a-f]\+-uid"
   image_id=$($runtime image ls --format "{{.Repository}}:{{.Tag}}" | grep "$search_pattern" | awk '{print $1}')
   if [ "$image_id" != "" ]; then
