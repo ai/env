@@ -29,7 +29,7 @@ mkdir -p ~/.config/git
 mkdir -p ~/.config/pnpm
 
 cp -f ~/dotfiles/zshrc ~/.zshrc
-cp -f ~/dotfiles/bashrc ~/.bashrc
+cp -f ~/dotfiles/devcontainer/bashrc ~/.bashrc
 cp -f ~/dotfiles/gitconfig ~/.config/git/config
 cp -f ~/dotfiles/ripgreprc ~/.config/ripgreprc
 cp -f ~/dotfiles/micro.json ~/.config/micro/settings.json
