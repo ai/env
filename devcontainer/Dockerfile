@@ -1,7 +1,7 @@
 FROM registry.fedoraproject.org/fedora:44
 
-ENV NODE_VERSION=26.1.0 \
-  PNPM_VERSION=11.1.3 \
+ENV NODE_VERSION=26.3.0 \
+  PNPM_VERSION=11.5.1 \
   NODE_24=24.15.0 \
   NODE_22=22.22.2 \
   DIFFT_VERSION=0.68.0 \
