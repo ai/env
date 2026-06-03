@@ -24,6 +24,13 @@ while true; do
         URL=$(playerctl --player="$player" metadata xesam:url 2>/dev/null)
         STATUS=$(playerctl --player="$player" status 2>/dev/null)
 
+        IS_TWITTER=$(echo "$URL" | grep -q "x.com/watch" && echo true)
+        if [ "$TWITTER" = "true" ] && [ "$STATUS" = "Playing" ]; then
+          log "Twitter playing, skipping lock"
+          LOCK_DISABLED="true"
+          break
+        fi
+
         IS_YOUTUBE=$(echo "$URL" | grep -q "youtube.com/watch" && echo true)
         if [ "$IS_YOUTUBE" = "true" ] && [ "$STATUS" = "Playing" ]; then
           log "YouTube playing, skipping lock"
