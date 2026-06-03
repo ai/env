@@ -21,6 +21,7 @@
 - [GSConnect](https://extensions.gnome.org/extension/1319/gsconnect/)
 - [Hide Keyboard Layout](https://extensions.gnome.org/extension/2848/hide-keyboard-layout/)
 - [Home Assistant Extension](https://extensions.gnome.org/extension/4170/home-assistant-extension/)
+- [Ignore Lid](https://extensions.gnome.org/extension/10006/ignore-lid/)
 - [Launch New Instance](https://extensions.gnome.org/extension/600/launch-new-instance/)
 - [Night Theme Switcher](https://extensions.gnome.org/extension/2236/night-theme-switcher/)
 - [OSD Volume Brightness Percentage](https://extensions.gnome.org/extension/9780/osd-volume-brightness-percentage/)
