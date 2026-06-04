@@ -64,14 +64,15 @@ borg create                                                \
     --exclude '**/*.log'                                   \
     --exclude '**/sitnik.es/dist'                          \
     ::'{hostname}-{now}'                                   \
-    ~/Projects/susedko                                          \
-    ~/Projects/environment                                      \
-    ~/Projects/sitnik.es                                        \
+    ~/Projects/susedko                                     \
+    ~/Projects/environment                                 \
+    ~/Projects/sitnik.es                                   \
     ~/.ssh                                                 \
     ~/.local/share/gnupg                                   \
     ~/Документы/.Private                                   \
-    ~/.config/mozilla                                             \
+    ~/.config/mozilla                                      \
     ~/.config/gsconnect                                    \
+    ~/.local/share/claude                                  \
     ~/.local/share/gnome-shell-extensions-settings         \
     ~/.var/app
 borg prune                         \
