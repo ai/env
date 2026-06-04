@@ -201,9 +201,9 @@ Copy configs:
 
 Set mouse buttons config at `/etc/logid.cfg`:
 
-```
+```js
 devices: ({
-  name: "MX Master 3S";
+  name: "MX Master 4";
 
   smartshift: { on: false; }
 
@@ -222,6 +222,13 @@ devices: ({
       action = {
         type: "Keypress";
         keys: ["KEY_LEFTCTRL", "KEY_C"];
+      };
+    },
+    {
+      cid: 0x1a0;  # Thumb button
+      action = {
+        type: "Keypress";
+        keys: ["KEY_LEFTMETA"];
       };
     }
   );
