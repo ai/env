@@ -17,7 +17,7 @@
     "claude-acp": {
       "default_config_options": {
         "model": "opus",
-        "mode": "bypassPermissions"
+        "mode": "default"
       },
       "type": "registry"
     }

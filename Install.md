@@ -6,13 +6,13 @@ Download [Fedora image](https://getfedora.org/ru/workstation/)
 and write it to the USB drive:
 
 ```sh
-sudo ~/Projects/environment/prepare-install-drive PATH_TO.iso /dev/sdX
+sudo ~/Projects/env/prepare-install-drive PATH_TO.iso /dev/sdX
 ```
 
 Copy these `Vídeos/*` to server and backup machine:
 
 ```sh
-~/Projects/environment/bin/backup
+~/Projects/env/bin/backup
 ```
 
 ### BIOS
@@ -131,7 +131,7 @@ mkdir -p ~/.local/share/flatpak/exports/share/applications/
 cp /var/lib/flatpak/exports/share/applications/us.zoom.Zoom.desktop ~/.local/share/flatpak/exports/share/applications/
 ```
 
-Replace `Exec` to `/home/ai/Projects/environment/bin/zoom @@u %U @@` in `~/.local/share/applications/us.zoom.Zoom.desktop`.
+Replace `Exec` to `/home/ai/Projects/env/bin/zoom @@u %U @@` in `~/.local/share/applications/us.zoom.Zoom.desktop`.
 
 Add Autostart and fingers to user settings.
 
@@ -170,7 +170,7 @@ dconf write /org/freedesktop/tracker/miner/files/crawling-interval -2
 Copy `.ssh` and `.local/share/gnupg`:
 
 ```sh
-~/Projects/environment/bin/private
+~/Projects/env/bin/private
 ```
 
 Change permissions:
@@ -186,7 +186,7 @@ chmod 600 ~/.ssh/id_* ~/.local/share/gnupg/private-keys-v1.d/*
 Copy configs:
 
 ```sh
-~/Projects/environment/bin/copy-env system
+~/Projects/env/bin/copy-env system
 ```
 
 ## Input
@@ -393,7 +393,7 @@ Install extensions from [`GNOME.md`](./GNOME.md).
 Restore settings file from backup:
 
 ```sh
-~/Projects/environment/bin/restore-gnome-extensions
+~/Projects/env/bin/restore-gnome-extensions
 ```
 
 Clean up applications list.
@@ -474,7 +474,7 @@ Add service to `~/.config/systemd/user/force-lock.service`:
 Description=Force Lock
 
 [Service]
-ExecStart=/home/ai/Projects/environment/bin/force-lock
+ExecStart=/home/ai/Projects/env/bin/force-lock
 Restart=on-failure
 RestartSec=30s
 
@@ -491,7 +491,7 @@ After=network-online.target
 Wants=network-online.target
 
 [Service]
-ExecStart=/home/ai/Projects/environment/bin/susedko-listener
+ExecStart=/home/ai/Projects/env/bin/susedko-listener
 Restart=on-failure
 RestartSec=30s
 StartLimitBurst=5
@@ -546,7 +546,7 @@ chmod 700 ~/.local/share/history
 podman volume create shell-history
 podman volume create pnpm-store
 
-~/Projects/environment/bin/build-devcontainer
+~/Projects/env/bin/build-devcontainer
 cd ~/Projects/nanostores
 devup
 # Find container ID
@@ -621,7 +621,7 @@ WantedBy=default.target
 Install LanguageTool:
 
 ```sh
-~/Projects/environment/bin/update-languagetool
+~/Projects/env/bin/update-languagetool
 ```
 
 Enable service.

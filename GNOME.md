@@ -26,6 +26,7 @@
 - [Medialine](https://extensions.gnome.org/extension/10076/medialine/)
 - [Night Theme Switcher](https://extensions.gnome.org/extension/2236/night-theme-switcher/)
 - [OSD Volume Brightness Percentage](https://extensions.gnome.org/extension/9780/osd-volume-brightness-percentage/)
+- [Overview on empty workspace](https://extensions.gnome.org/extension/8974/overview-on-empty-workspace/)
 - [Quick Settings Tweaks](https://extensions.gnome.org/extension/5446/quick-settings-tweaker/)
 - [Screenshot OCR](https://extensions.gnome.org/extension/9338/screenshot-ocr/)
 - [Top Panel Workspace Scroll](https://extensions.gnome.org/extension/701/top-panel-workspace-scroll/)

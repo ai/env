@@ -123,7 +123,7 @@ if [ -n "$container" ]; then
 else
   export PATH="/home/ai/.local/lib/node/node_modules/.bin/:$PATH"
 
-  alias dev='/home/ai/Projects/environment/bin/dev'
+  alias dev='/home/ai/Projects/env/bin/dev'
   alias devup='dev --up'
   alias devdown='dev --down'
   alias pnpm='dev pnpm'
@@ -131,7 +131,7 @@ else
   alias multiocular='dev --port pnpm multiocular'
 
   # Run git hooks inside Dev Container
-  export GIT_CONFIG_PARAMETERS="'core.hooksPath=/home/ai/Projects/environment/hooks-trap'"
+  export GIT_CONFIG_PARAMETERS="'core.hooksPath=/home/ai/Projects/env/hooks-trap'"
 
   # Fast way to Dev projects
   if [ -d ~/Projects ]; then
@@ -139,7 +139,7 @@ else
   fi
 
   # Zed
-  alias e='~/Projects/environment/bin/zed-isolate .'
+  alias e='~/Projects/env/bin/zed-isolate .'
 
   # Development
   alias p='dev pnpm clean-publish --temp-dir .npm-release --without-publish \

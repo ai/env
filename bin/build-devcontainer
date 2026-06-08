@@ -1,7 +1,7 @@
 #!/bin/bash
 
-~/Projects/environment/bin/copy-env
+~/Projects/env/bin/copy-env
 
 podman build -t localhost/ai-opensource \
-  -f /home/ai/Projects/environment/devcontainer/Dockerfile \
-  /home/ai/Projects/environment
+  -f /home/ai/Projects/env/devcontainer/Dockerfile \
+  /home/ai/Projects/env

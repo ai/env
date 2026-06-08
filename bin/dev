@@ -52,7 +52,7 @@ function get_username() {
 }
 
 if [ "$1" = "--isolate" ]; then
-  cp ~/Projects/environment/devcontainer/devcontainer.json .devcontainer.json
+  cp ~/Projects/env/devcontainer/devcontainer.json .devcontainer.json
   if [ -d .git ]; then
     sed -i '/devcontainer/d' .git/info/exclude
     echo '.devcontainer.json' >> .git/info/exclude
@@ -71,7 +71,7 @@ if [ "$1" = "--up" ]; then
   devcontainer_args=(
     "--docker-path" "$runtime"
     "--mount" "type=bind,source=${SSH_AUTH_SOCK},target=/run/user/1000/gcr/ssh"
-    "--dotfiles-repository" "https://github.com/ai/environment.git"
+    "--dotfiles-repository" "https://github.com/ai/env.git"
     "--dotfiles-install-command" "devcontainer/install-dotfiles"
     "--workspace-folder" "$root"
     "--config" "$(devcontainer_config $root)"
@@ -109,8 +109,8 @@ elif [ "$1" = "--down" ]; then
   fi
 
 elif [ "$1" = "--rebuild" ]; then
-  ~/Projects/environment/bin/dev --up
-  ~/Projects/environment/bin/dev --down > /dev/null
+  ~/Projects/env/bin/dev --up
+  ~/Projects/env/bin/dev --down > /dev/null
   runtime=$(get_container_runtime)
   folder_name=$(basename "$root" | tr '[:upper:]' '[:lower:]' | tr -cd '[:alnum:]')
   label_ids=$($runtime ps -aq --filter "label=devcontainer.local_folder=$root")
@@ -124,7 +124,7 @@ elif [ "$1" = "--rebuild" ]; then
   if [ "$image_id" != "" ]; then
     $runtime image rm --force $image_id
   fi
-  ~/Projects/environment/bin/dev --up
+  ~/Projects/env/bin/dev --up
 
 elif [ "$1" = "--port" ]; then
   if [[ "$2" =~ ^[0-9]+$ ]]; then
@@ -172,7 +172,7 @@ else
   runtime=$(get_container_runtime)
   container_id=$(get_container_id)
   if [ "$container_id" == "" ]; then
-    ~/Projects/environment/bin/dev --up
+    ~/Projects/env/bin/dev --up
     container_id=$(get_container_id)
   fi
   subdir=""

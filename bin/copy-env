@@ -3,45 +3,45 @@
 
 if [ "$1" == "system" ]; then
   rm ~/.local/share/applications/*.{desktop,svg} -f
-  cp ~/Projects/environment/icons/* ~/.local/share/applications/
+  cp ~/Projects/env/icons/* ~/.local/share/applications/
   mkdir -p ~/.config/bat/
   mkdir -p ~/.config/mpv/
   mkdir -p ~/.config/git/
   mkdir -p ~/.config/micro/
   mkdir -p ~/.config/zed/
   rm -f ~/.zshrc
-  ln ~/Projects/environment/zshrc ~/.zshrc
-  cp ~/Projects/environment/.oxfmtrc.json ~/.oxfmtrc.json
-  cp ~/Projects/environment/zed.json ~/.config/zed/settings.json
-  cp ~/Projects/environment/zed-keys.json ~/.config/zed/keymap.json
-  cp ~/Projects/environment/mpv.conf ~/.config/mpv/mpv.conf
-  cp ~/Projects/environment/ripgreprc ~/.config/ripgreprc
-  cp ~/Projects/environment/sshconfig ~/.ssh/config
-  cp ~/Projects/environment/batconfig ~/.config/bat/config
-  cp ~/Projects/environment/gitconfig ~/.config/git/config
-  cp ~/Projects/environment/gitignore ~/.config/git/ignore
-  cp ~/Projects/environment/starship.toml ~/.config/starship.toml
-  cp ~/Projects/environment/mimeapps.list ~/.config/mimeapps.list
-  cp ~/Projects/environment/mpv-input.conf ~/.config/mpv/input.conf
-  cp ~/Projects/environment/micro.json ~/.config/micro/settings.json
+  ln ~/Projects/env/zshrc ~/.zshrc
+  cp ~/Projects/env/.oxfmtrc.json ~/.oxfmtrc.json
+  cp ~/Projects/env/zed.json ~/.config/zed/settings.json
+  cp ~/Projects/env/zed-keys.json ~/.config/zed/keymap.json
+  cp ~/Projects/env/mpv.conf ~/.config/mpv/mpv.conf
+  cp ~/Projects/env/ripgreprc ~/.config/ripgreprc
+  cp ~/Projects/env/sshconfig ~/.ssh/config
+  cp ~/Projects/env/batconfig ~/.config/bat/config
+  cp ~/Projects/env/gitconfig ~/.config/git/config
+  cp ~/Projects/env/gitignore ~/.config/git/ignore
+  cp ~/Projects/env/starship.toml ~/.config/starship.toml
+  cp ~/Projects/env/mimeapps.list ~/.config/mimeapps.list
+  cp ~/Projects/env/mpv-input.conf ~/.config/mpv/input.conf
+  cp ~/Projects/env/micro.json ~/.config/micro/settings.json
 else
-  rm ~/Projects/environment/icons/*.{svg,desktop} -f
-  cp ~/.oxfmtrc.json ~/Projects/environment/.oxfmtrc.json
-  cp ~/.ssh/config ~/Projects/environment/sshconfig
-  cp ~/.config/ripgreprc ~/Projects/environment/ripgreprc
-  cp ~/.config/git/config ~/Projects/environment/gitconfig
-  cp ~/.config/git/ignore ~/Projects/environment/gitignore
-  cp ~/.config/bat/config ~/Projects/environment/batconfig
-  cp ~/.config/mpv/mpv.conf ~/Projects/environment/mpv.conf
-  cp ~/.config/starship.toml ~/Projects/environment/starship.toml
-  cp ~/.config/mpv/input.conf ~/Projects/environment/mpv-input.conf
-  cp ~/.config/mimeapps.list ~/Projects/environment/mimeapps.list
-  cp ~/.config/micro/settings.json ~/Projects/environment/micro.json
-  cp ~/.local/share/applications/*.{svg,desktop} ~/Projects/environment/icons/
-  cp ~/.config/zed/settings.json ~/Projects/environment/zed.json
-  cp ~/.config/zed/keymap.json ~/Projects/environment/zed-keys.json
-  rm ~/Projects/environment/icons/chrome-* -f
-  rm ~/Projects/environment/icons/userapp-* -f
-  rm ~/Projects/environment/icons/org.gnome.Shell.Extensions.* -f
-  ~/Projects/environment/bin/update-extension-lists
+  rm ~/Projects/env/icons/*.{svg,desktop} -f
+  cp ~/.oxfmtrc.json ~/Projects/env/.oxfmtrc.json
+  cp ~/.ssh/config ~/Projects/env/sshconfig
+  cp ~/.config/ripgreprc ~/Projects/env/ripgreprc
+  cp ~/.config/git/config ~/Projects/env/gitconfig
+  cp ~/.config/git/ignore ~/Projects/env/gitignore
+  cp ~/.config/bat/config ~/Projects/env/batconfig
+  cp ~/.config/mpv/mpv.conf ~/Projects/env/mpv.conf
+  cp ~/.config/starship.toml ~/Projects/env/starship.toml
+  cp ~/.config/mpv/input.conf ~/Projects/env/mpv-input.conf
+  cp ~/.config/mimeapps.list ~/Projects/env/mimeapps.list
+  cp ~/.config/micro/settings.json ~/Projects/env/micro.json
+  cp ~/.local/share/applications/*.{svg,desktop} ~/Projects/env/icons/
+  cp ~/.config/zed/settings.json ~/Projects/env/zed.json
+  cp ~/.config/zed/keymap.json ~/Projects/env/zed-keys.json
+  rm ~/Projects/env/icons/chrome-* -f
+  rm ~/Projects/env/icons/userapp-* -f
+  rm ~/Projects/env/icons/org.gnome.Shell.Extensions.* -f
+  ~/Projects/env/bin/update-extension-lists
 fi
