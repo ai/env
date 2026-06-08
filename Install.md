@@ -6,22 +6,14 @@ Download [Fedora image](https://getfedora.org/ru/workstation/)
 and write it to the USB drive:
 
 ```sh
-flatpak install flathub io.gitlab.adhami3310.Impression
+sudo ~/Projects/environment/prepare-install-drive PATH_TO.iso /dev/sdX
 ```
 
-Copy `.ssh` and `.local/share/gnupg` into `Документы/.Private`.
-
-Clean `node_modules`:
+Copy these `Vídeos/*` to server and backup machine:
 
 ```sh
-rm -R ~/Projects/*/node_modules ~/Projects/*/*/node_modules ~/Projects/*/coverage ~/Projects/susedko/fedora-coreos.iso
+~/Projects/environment/bin/backup
 ```
-
-Copy these files to external SDD:
-
-- `Projects/`
-- `Vídeos/*`
-- `Документы/.Private/`
 
 ### BIOS
 
@@ -108,7 +100,7 @@ sudo dnf swap mesa-vdpau-drivers mesa-vdpau-drivers-freeworld
 sudo dnf copr enable atim/starship
 sudo dnf copr enable dusansimic/themes
 sudo dnf copr enable hyperreal/better_fonts
-sudo dnf install xclip micro fuse-encfs zenity borgbackup openssl ffmpegthumbnailer nss-tools mosquitto ydotool amrnb amrwb faac faad2 flac gstreamer1-libav gstreamer1-plugins-bad-freeworld gstreamer-ffmpeg gstreamer-plugins-bad-nonfree gstreamer-plugins-espeak gstreamer-plugins-ugly lame libdca libmad libmatroska x264 x265 xvidcore gstreamer1-plugins-bad-free gstreamer1-plugins-base gstreamer1-plugins-good gstreamer-plugins-bad gstreamer1-plugins-ugly-free mpv ffmpeg xorg-x11-drv-intel intel-media-driver webp-pixbuf-loader heif-pixbuf-loader avif-pixbuf-loader libheif-freeworld ffmpeg-libs libva libva-utils gstreamer1-vaapi mozilla-openh264 libheif-tools unrar p7zip p7zip-plugins speech-dispatcher speech-dispatcher-utils google-chrome-stable nodejs podman git tig ripgrep xkill bat make difftastic nextcloud-client zsh util-linux-user starship sqlite  morewaita-icon-theme nethogs fuse-sshfs logiops libgda libgda-sqlite playerctl cabextract xorg-x11-font-utils tesseract tesseract-devel zed podman-compose
+sudo dnf install xclip micro fuse-encfs zenity borgbackup openssl ffmpegthumbnailer nss-tools mosquitto ydotool amrnb amrwb faac faad2 flac gstreamer1-libav gstreamer1-plugins-bad-freeworld gstreamer-ffmpeg gstreamer-plugins-bad-nonfree gstreamer-plugins-espeak gstreamer-plugins-ugly lame libdca libmad libmatroska x264 x265 xvidcore gstreamer1-plugins-bad-free gstreamer1-plugins-base gstreamer1-plugins-good gstreamer-plugins-bad gstreamer1-plugins-ugly-free mpv ffmpeg xorg-x11-drv-intel intel-media-driver webp-pixbuf-loader heif-pixbuf-loader avif-pixbuf-loader libheif-freeworld ffmpeg-libs libva libva-utils gstreamer1-vaapi mozilla-openh264 libheif-tools unrar p7zip p7zip-plugins speech-dispatcher speech-dispatcher-utils google-chrome-stable nodejs podman git tig ripgrep xkill bat make difftastic nextcloud-client zsh util-linux-user starship sqlite  morewaita-icon-theme nethogs fuse-sshfs logiops libgda libgda-sqlite playerctl cabextract xorg-x11-font-utils tesseract tesseract-devel zed podman-compose sgdisk
 sudo rpm -ivh --nodigest --nofiledigest https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
 ```
 
@@ -356,7 +348,7 @@ Open settings:
 - **Appearance:** use standard GNOME wallpaper.
 - **Notifications:** disable Notifications on lock screen.
 - **Search:** keep only Calculator and Settings.
-- **Multitask:** disable Active corners.
+- **Multitask:** disable Active corners & Hot corner.
 - **Online accounts:** add Google.
 - **Power:** enable Show percentage and disable screen lock.
 - **Mouse:** mouse speed to 75%, touchpad speed to 90%.

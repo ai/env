@@ -1,0 +1,105 @@
+#!/bin/sh
+# Prepare drive with Fedora ISO and all files to install new system
+#
+# Usage: sudo prepare-install-drive PATH_TO.iso /dev/sdX
+
+set -e
+
+ISO="$1"
+DEVICE="$2"
+
+die() {
+  echo "Error: $1" >&2
+  exit 1
+}
+
+# Validate arguments
+
+[ -n "$ISO" ] && [ -n "$DEVICE" ] || \
+  die "usage: $0 PATH_TO.iso /dev/sdX"
+[ "$(id -u)" -eq 0 ] || \
+  die "must run as root (use sudo)"
+[ -f "$ISO" ] || \
+  die "ISO file not found: $ISO"
+[ -b "$DEVICE" ] || \
+  die "not a block device: $DEVICE"
+
+case "$DEVICE" in
+  /dev/sd[a-z]) ;;
+  *) die "expected a whole-drive path like /dev/sdb, got: $DEVICE" ;;
+esac
+
+# Source data to copy onto the extra partition. When run via sudo, read from the
+# invoking user's home, not root's.
+if [ -n "$SUDO_USER" ]; then
+  USER_HOME=$(getent passwd "$SUDO_USER" | cut -d: -f6)
+else
+  USER_HOME="$HOME"
+fi
+PROJECTS="$USER_HOME/Projects"
+PRIVATE="$USER_HOME/Документы/.Private"
+
+[ -d "$PROJECTS" ] || die "not found: $PROJECTS"
+[ -d "$PRIVATE" ] || die "not found: $PRIVATE"
+
+# Confirm before destroying the drive
+echo "About to ERASE $DEVICE and write $ISO:"
+echo
+lsblk -o NAME,SIZE,MODEL,MOUNTPOINTS "$DEVICE"
+echo
+printf "Type the device name (%s) to continue: " "$DEVICE"
+read -r CONFIRM
+[ "$CONFIRM" = "$DEVICE" ] || die "aborted"
+
+
+# Unmount anything currently mounted from the drive
+for PART in $(lsblk -lnp -o NAME "$DEVICE" | tail -n +2); do
+  umount "$PART" 2>/dev/null || true
+done
+
+# Write the ISO
+echo "Writing ISO to $DEVICE…"
+dd if="$ISO" of="$DEVICE" bs=4M status=progress oflag=sync conv=fsync
+sync
+
+# Add an extra ext4 partition in the free space
+echo "Creating extra partition…"
+# The isohybrid image leaves its backup GPT header mid-drive; move it to the
+# very end so the rest of the drive becomes addressable free space.
+sgdisk --move-second-header "$DEVICE"
+# Create a new partition filling all remaining space.
+sgdisk --new=0:0:0 --typecode=0:8300 --change-name=0:"DATA" "$DEVICE"
+
+partprobe "$DEVICE"
+udevadm settle
+
+# The new partition is the highest-numbered one on the drive.
+DATA_PART=$(lsblk -lnp -o NAME "$DEVICE" | tail -n 1)
+[ "$DATA_PART" != "$DEVICE" ] || die "could not find the new partition"
+echo "Formatting $DATA_PART as ext4…"
+mkfs.ext4 -F -L DATA "$DATA_PART"
+
+# Copy files onto the new partition
+MOUNT=$(mktemp -d)
+cleanup() {
+  umount "$MOUNT" 2>/dev/null || true
+  rmdir "$MOUNT" 2>/dev/null || true
+}
+trap cleanup EXIT
+mount "$DATA_PART" "$MOUNT"
+
+echo "Cleaning $PROJECTS…"
+rm -Rf $PROJECTS/*/node_modules $PROJECTS/*/*/node_modules $PROJECTS/*/*/*/node_modules $PROJECTS/*/.pnpm-store $PROJECTS/*/coverage $PROJECTS/susedko/fedora-coreos.iso
+
+echo "Copying $PROJECTS…"
+cp -a "$PROJECTS" "$MOUNT/"
+
+echo "Copying $PRIVATE…"
+mkdir -p "$MOUNT/Документы"
+cp -a "$PRIVATE" "$MOUNT/Документы/"
+
+echo "Syncing…"
+sync
+
+echo
+echo "Done. $DEVICE is ready to install Fedora and carry your files."
