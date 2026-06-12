@@ -41,11 +41,18 @@ function get_container_id() {
   $runtime ps -q --filter label=devcontainer.local_folder=$root
 }
 
-function get_username() {
-  local username=""
+function get_dockerfile_user() {
   if [ -f "$root/.devcontainer/Dockerfile" ]; then
+    awk -v IGNORECASE=1 '/^\s*USER\s+/{u=$2} END{print u}' "$root/.devcontainer/Dockerfile"
+  fi
+}
+
+function get_username() {
+  local username=$(get_dockerfile_user)
+  if [ "$username" = "" ] && [ -f "$root/.devcontainer/devcontainer.json" ]; then
     username=$(
-      awk -v IGNORECASE=1 '/^\s*USER\s+/{u=$2} END{print u}' "$root/.devcontainer/Dockerfile"
+      sed -n 's/.*"remoteUser"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' \
+        "$root/.devcontainer/devcontainer.json" | head -n 1
     )
   fi
   echo "${username:-ai}"
@@ -68,33 +75,49 @@ fi
 
 if [ "$1" = "--up" ]; then
   runtime=$(get_container_runtime)
+  username=$(get_username)
+  dockerfile_user=$(get_dockerfile_user)
+  dotfiles_repo="https://github.com/ai/env.git"
+  dotfiles_cmd="devcontainer/install-dotfiles"
   devcontainer_args=(
     "--docker-path" "$runtime"
     "--mount" "type=bind,source=${SSH_AUTH_SOCK},target=/run/user/1000/gcr/ssh"
-    "--dotfiles-repository" "https://github.com/ai/env.git"
-    "--dotfiles-install-command" "devcontainer/install-dotfiles"
     "--workspace-folder" "$root"
     "--config" "$(devcontainer_config $root)"
   )
+  if [ -n "$dockerfile_user" ]; then
+    devcontainer_args+=(
+      "--dotfiles-repository" "$dotfiles_repo"
+      "--dotfiles-install-command" "$dotfiles_cmd"
+    )
+  fi
   if [ -d /home/ai/.local/share/multiocular ]; then
     devcontainer_args+=(
-      "--mount" "type=bind,source=/home/ai/.local/share/multiocular,target=/home/$(get_username)/.local/share/multiocular"
+      "--mount" "type=bind,source=/home/ai/.local/share/multiocular,target=/home/$username/.local/share/multiocular"
     )
   fi
   if [ -d /home/ai/.local/share/claude ]; then
     devcontainer_args+=(
-      "--mount" "type=bind,source=/home/ai/.local/share/claude,target=/home/$(get_username)/.local/share/claude"
-      "--mount" "type=bind,source=/home/ai/.local/share/claude,target=/home/$(get_username)/.claude"
+      "--mount" "type=bind,source=/home/ai/.local/share/claude,target=/home/$username/.local/share/claude"
+      "--mount" "type=bind,source=/home/ai/.local/share/claude,target=/home/$username/.claude"
     )
   fi
   if [ -d /home/ai/.local/share/zed ]; then
     devcontainer_args+=(
-      "--mount" "type=bind,source=/home/ai/.local/share/zed,target=/home/$(get_username)/.local/share/zed"
-      "--mount" "type=bind,source=/home/ai/.config/zed,target=/home/$(get_username)/.config/zed"
-      "--mount" "type=bind,source=/home/ai/.local/share/zed_server,target=/home/$(get_username)/.zed_server"
+      "--mount" "type=bind,source=/home/ai/.local/share/zed,target=/home/$username/.local/share/zed"
+      "--mount" "type=bind,source=/home/ai/.config/zed,target=/home/$username/.config/zed"
+      "--mount" "type=bind,source=/home/ai/.local/share/zed_server,target=/home/$username/.zed_server"
     )
   fi
   devcontainer up "${devcontainer_args[@]}"
+
+  if [ -z "$dockerfile_user" ]; then
+    container_id=$(get_container_id)
+    $runtime exec -u 0 "$container_id" sh -c \
+      "chown $username: /home/$username/.local /home/$username/.local/share /home/$username/.config 2>/dev/null || true"
+    $runtime exec -u "$username" -e HOME="/home/$username" "$container_id" sh -c \
+      "rm -rf ~/dotfiles && git clone $dotfiles_repo ~/dotfiles && cd ~/dotfiles && ./$dotfiles_cmd"
+  fi
 
 elif [ "$1" = "--down" ]; then
   runtime=$(get_container_runtime)
@@ -180,9 +203,10 @@ else
     subdir="${PWD#$root/}"
   fi
   workdir="/workspaces/$(basename $root)/$subdir"
+  username=$(get_username)
   if [ -z "$1" ]; then
-    $runtime exec -w $workdir -it $container_id zsh
+    $runtime exec -u "$username" -e HOME="/home/$username" -w $workdir -it $container_id zsh
   else
-    $runtime exec -w $workdir -it $container_id zsh -ic "$*"
+    $runtime exec -u "$username" -e HOME="/home/$username" -w $workdir -it $container_id zsh -ic "$*"
   fi
 fi
