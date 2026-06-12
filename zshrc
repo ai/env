@@ -13,7 +13,7 @@ autoload -U colors && colors
 bindkey -e
 bindkey ';5D' backward-word # Ctrl+Left
 bindkey ';5C' forward-word  # Ctrl+Right
-stty intr ^X                # Replace Ctrl+C to Ctrl+X
+stty intr '^X'              # Replace Ctrl+C to Ctrl+X
 stty susp undef             # Disable Ctrl + Z
 
 # Force keeping home folder clean
