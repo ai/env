@@ -197,28 +197,28 @@ Set mouse buttons config at `/etc/logid.cfg`:
 devices: ({
   name: "MX Master 4";
 
-  smartshift: { on: false; }
+  smartshift: { on: false; };
 
   hiresscroll: { hires: false; invert: false; target: false; };
 
   buttons: (
     {
       cid: 0x53;  # Back
-      action = {
+      action: {
         type: "Keypress";
         keys: ["KEY_LEFTCTRL", "KEY_V"];
       };
     },
     {
       cid: 0x56;  # Forward
-      action = {
+      action: {
         type: "Keypress";
         keys: ["KEY_LEFTCTRL", "KEY_C"];
       };
     },
     {
       cid: 0x1a0;  # Thumb button
-      action = {
+      action: {
         type: "Keypress";
         keys: ["KEY_LEFTMETA"];
       };
