@@ -156,7 +156,7 @@ sudo dnf remove nano
 Disable waking up by mouse by creating `/etc/udev/rules.d/logitech-bolt.rules`:
 
 ```sh
-ACTION=="add", SUBSYSTEM=="usb", DRIVERS=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c548", ATTR{power/wakeup}="disabled"
+ACTION=="add", SUBSYSTEM=="usb", DRIVERS=="usb", ATTRS{idVendor}=="046d", ATTR{power/wakeup}="disabled"
 ```
 
 Disable file system scanning:
