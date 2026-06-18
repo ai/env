@@ -1,15 +1,16 @@
 FROM registry.fedoraproject.org/fedora:44
 
-ENV NODE_VERSION=26.3.0 \
-  PNPM_VERSION=11.6.0 \
-  NODE_24=24.15.0 \
-  NODE_22=22.22.2 \
-  DIFFT_VERSION=0.68.0 \
+ENV NODE_VERSION=26.3.1 \
+  PNPM_VERSION=11.8.0 \
+  NODE_24=24.17.0 \
+  NODE_22=22.23.0 \
+  DIFFT_VERSION=0.69.0 \
   BAT_VERSION=0.26.1 \
   RG_VERSION=15.1.0 \
-  ATUIN_VERSION=18.16.0 \
-  STARSHIP_VERSION=1.25.0 \
-  PNPM_COMPETITION_VERSION=0.5.5
+  ATUIN_VERSION=18.16.1 \
+  STARSHIP_VERSION=1.25.1 \
+  PNPM_COMPETITION_VERSION=0.5.5 \
+  SOCKET_FIREWALL_VERSION=1.12.0
 
 ADD https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.gz /node.tar.xz
 ADD https://nodejs.org/dist/v${NODE_24}/node-v${NODE_24}-linux-x64.tar.gz /node24.tar.xz
@@ -22,6 +23,7 @@ ADD https://github.com/BurntSushi/ripgrep/releases/download/$RG_VERSION/ripgrep-
 ADD https://github.com/atuinsh/atuin/releases/download/v$ATUIN_VERSION/atuin-x86_64-unknown-linux-musl.tar.gz /atuin.tar.gz
 ADD https://github.com/starship/starship/releases/download/v$STARSHIP_VERSION/starship-x86_64-unknown-linux-musl.tar.gz /starship.tar.gz
 ADD https://github.com/g-plane/pnpm-shell-completion/releases/download/v$PNPM_COMPETITION_VERSION/pnpm-shell-completion_x86_64-unknown-linux-musl.tar.gz /pnpm-completion.tar.gz
+ADD https://github.com/SocketDev/sfw-free/releases/download/v$SOCKET_FIREWALL_VERSION/sfw-free-linux-x86_64 /usr/local/bin/sfw
 
 RUN dnf install -yq zsh micro git tig make awk psmisc procps-ng curl \
   bind-utils iputils iproute libatomic nss dbus-libs atk at-spi2-atk cups-libs \
@@ -82,6 +84,8 @@ RUN mkdir /usr/local/share/pnpm \
   && tar -xz -f /pnpm-completion.tar.gz -C /usr/local/lib/zsh/pnpm-shell-completion pnpm-shell-completion pnpm-shell-completion.plugin.zsh \
   && chmod a+x /usr/local/lib/zsh/pnpm-shell-completion/pnpm-shell-completion \
   && rm /pnpm-completion.tar.gz \
+  \
+  && chmod +x /usr/local/bin/sfw \
   \
   && useradd -s /bin/zsh ai
 

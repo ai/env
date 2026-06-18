@@ -104,7 +104,7 @@ fi
 alias r='dev node --run'
 alias t='dev node --run test'
 alias pn='dev pnpm'
-alias pnx='dev pnpm dlx'
+alias pnx='dev sfw pnpm dlx'
 alias pui='pnpm update --interactive --latest -r --include-workspace-root'
 alias pu='pnpm update -r --include-workspace-root'
 alias pui1='pnpm update --interactive --latest'
@@ -116,6 +116,7 @@ if [ -n "$container" ]; then
     export PATH="$PNPM_HOME/bin/:$PATH"
   fi
   alias dev='command'
+  alias pnpm='sfw pnpm'
 
   if [ -z "$SSH_AUTH_SOCK" ] && [ -S "/run/user/1000/gcr/ssh" ]; then
     export SSH_AUTH_SOCK="/run/user/1000/gcr/ssh"
@@ -126,7 +127,7 @@ else
   alias dev='/home/ai/Projects/env/bin/dev'
   alias devup='dev --up'
   alias devdown='dev --down'
-  alias pnpm='dev pnpm'
+  alias pnpm='dev sfw pnpm'
   alias node='dev node'
   alias multiocular='dev --port pnpm multiocular'
 

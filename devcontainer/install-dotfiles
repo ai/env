@@ -1,12 +1,13 @@
 #!/bin/sh
 
 MICRO_VERSION="2.0.15"
-DIFFT_VERSION="0.68.0"
+DIFFT_VERSION="0.69.0"
 BAT_VERSION="0.26.1"
 RG_VERSION="15.1.0"
-ATUIN_VERSION="18.13.3"
-STARSHIP_VERSION="1.24.2"
+ATUIN_VERSION="18.16.1"
+STARSHIP_VERSION="1.25.1"
 PNPM_COMPETITION_VERSION="0.5.5"
+SOCKET_FIREWALL_VERSION="1.12.0"
 
 ARCH=$(uname -m)
 echo "Detected architecture: $ARCH"
@@ -112,13 +113,23 @@ fi
 
 if [ ! -f ~/.local/bin/starship ] && [ ! -f /usr/local/bin/starship ]; then
   if [ "$ARCH" = "x86_64" ]; then
-    MICRO_ARCH="$ARCH_SUFFIX"
+    STARSHIP_ARCH="$ARCH_SUFFIX"
   else
-    MICRO_ARCH="aarch64-unknown-linux-musl"
+    STARSHIP_ARCH="aarch64-unknown-linux-musl"
   fi
-  curl -sL https://github.com/starship/starship/releases/download/v$STARSHIP_VERSION/starship-$MICRO_ARCH.tar.gz | tar xz
+  curl -sL https://github.com/starship/starship/releases/download/v$STARSHIP_VERSION/starship-$STARSHIP_ARCH.tar.gz | tar xz
   chmod +x starship
   mv starship ~/.local/bin
+fi
+
+if [ ! -f ~/.local/bin/sfw ] && [ ! -f /usr/local/bin/sfw ]; then
+  if [ "$ARCH" = "x86_64" ]; then
+    SFW_ARCH="x86_64"
+  else
+    SFW_ARCH="arm64"
+  fi
+  curl -sL https://github.com/SocketDev/sfw-free/releases/download/v$SOCKET_FIREWALL_VERSION/sfw-free-linux-$SFW_ARCH -o ~/.local/bin/sfw
+  chmod +x ~/.local/bin/sfw
 fi
 
 mkdir -p ~/.local/lib/zsh
