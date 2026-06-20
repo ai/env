@@ -63,18 +63,11 @@ Reduce swap usage by creating `/etc/sysctl.d/99-swappiness.conf` with:
 vm.swappiness = 10
 ```
 
-Fix booting video glitch:
-
-```sh
-sudo grubby --update-kernel=ALL --args="plymouth.use-simpledrm=0"
-```
-
-Enable `Rendimiento`, disable `Ahorro de energía automático`,
-`Suspender automaticámente` in Energía settings.
+Enable `Performance`, disable `Automatic waiting saving` in Power settings.
 
 ### System Update
 
-Set `KEYMAP=us` and `XKBLAYOUT=us` in `/etc/vconsole.conf`.
+Add `XKBLAYOUT="us"` in `/etc/vconsole.conf`.
 
 Remove unnecessary packages:
 
@@ -82,13 +75,13 @@ Remove unnecessary packages:
 sudo dnf remove cheese rhythmbox gnome-boxesd orca gnome-contacts gnome-getting-started-docs nautilus-sendto gnome-shell-extension-* libreoffice-* gnome-characters gnome-maps gnome-photos simple-scan virtualbox-guest-additions gedit gnome-boxes gnome-tour gnome-connections mediawriter eog gnome-system-monitor baobab gnome-log gnome-calculator gnome-weather gnome-text-editor gnome-font-viewer gnome-clocks gnome-calendar evince totem ffmpeg-free snapshot intel-media-driver cups-browsed anaconda malcontent-control loupe cockpit-bridge cockpit-system cockpit-storaged cockpit-ws cockpit-ws-selinux
 ```
 
-Run Software Center, disable `Fedora Flatpak` and enable Flathub and Chrome.
+Run Software Center, enable Flathub and Chrome.
 
-Add RPM Fusion (for codecs) and Terra (for Zed):
+Add RPM Fusion (for codecs):
 
 ```sh
 sudo dnf install --nogpgcheck http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-sudo dnf install --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release
+flatpak remote-delete fedora
 ```
 
 Update system via Software Center.
@@ -96,13 +89,14 @@ Update system via Software Center.
 Install software:
 
 ```sh
+sudo dnf install --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release
 sudo dnf swap ffmpeg-free ffmpeg --allowerasing
 sudo dnf swap mesa-va-drivers mesa-va-drivers-freeworld
 sudo dnf swap mesa-vdpau-drivers mesa-vdpau-drivers-freeworld
 sudo dnf copr enable atim/starship
 sudo dnf copr enable dusansimic/themes
 sudo dnf copr enable hyperreal/better_fonts
-sudo dnf install xclip micro fuse-encfs zenity borgbackup openssl ffmpegthumbnailer nss-tools mosquitto ydotool amrnb amrwb faac faad2 flac gstreamer1-libav gstreamer1-plugins-bad-freeworld gstreamer-ffmpeg gstreamer-plugins-bad-nonfree gstreamer-plugins-espeak gstreamer-plugins-ugly lame libdca libmad libmatroska x264 x265 xvidcore gstreamer1-plugins-bad-free gstreamer1-plugins-base gstreamer1-plugins-good gstreamer-plugins-bad gstreamer1-plugins-ugly-free mpv ffmpeg xorg-x11-drv-intel intel-media-driver webp-pixbuf-loader heif-pixbuf-loader avif-pixbuf-loader libheif-freeworld ffmpeg-libs libva libva-utils gstreamer1-vaapi mozilla-openh264 libheif-tools unrar p7zip p7zip-plugins speech-dispatcher speech-dispatcher-utils google-chrome-stable nodejs podman git tig ripgrep xkill bat make difftastic nextcloud-client zsh util-linux-user starship sqlite  morewaita-icon-theme nethogs fuse-sshfs logiops libgda libgda-sqlite playerctl cabextract xorg-x11-font-utils tesseract tesseract-devel zed podman-compose sgdisk
+sudo dnf install xclip micro fuse-encfs zenity borgbackup openssl ffmpegthumbnailer nss-tools mosquitto ydotool amrnb amrwb faac faad2 flac gstreamer1-libav gstreamer1-plugins-bad-freeworld gstreamer-ffmpeg gstreamer-plugins-bad-nonfree gstreamer-plugins-espeak gstreamer-plugins-ugly lame libdca libmad libmatroska x264 x265 xvidcore gstreamer1-plugins-bad-free gstreamer1-plugins-base gstreamer1-plugins-good gstreamer-plugins-bad gstreamer1-plugins-ugly-free mpv ffmpeg xorg-x11-drv-intel intel-media-driver webp-pixbuf-loader heif-pixbuf-loader avif-pixbuf-loader libheif-freeworld ffmpeg-libs libva libva-utils gstreamer1-vaapi mozilla-openh264 libheif-tools unrar p7zip p7zip-plugins speech-dispatcher speech-dispatcher-utils google-chrome-stable nodejs podman git tig ripgrep xkill bat make difftastic nextcloud-client zsh util-linux-user starship sqlite  morewaita-icon-theme nethogs fuse-sshfs logiops libgda libgda-sqlite playerctl cabextract xorg-x11-font-utils tesseract tesseract-devel zed podman-compose sgdisk tesseract-langpack-rus zbar
 sudo rpm -ivh --nodigest --nofiledigest https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
 ```
 
@@ -119,23 +113,11 @@ Install applications from Flatpak:
 flatpak install flathub de.haeckerfelix.Fragments org.telegram.desktop org.nickvision.tubeconverter org.gnome.Loupe com.mattjakeman.ExtensionManager io.gitlab.adhami3310.Converter net.nokyan.Resources org.gnome.Calculator org.gnome.Logs org.gnome.Weather org.gnome.clocks org.gnome.Calendar org.gnome.Epiphany org.inkscape.Inkscape org.gnome.gitlab.YaLTeR.VideoTrimmer org.gnome.World.Iotas app.devsuite.Ptyxis hu.irl.cameractrls org.gnome.Snapshot org.gnome.Papers org.gimp.GIMP be.alexandervanhee.gradia com.github.PintaProject.Pinta com.yubico.yubioath org.gnome.font-viewer
 ```
 
-Install [Zoom](https://zoom.us/download).
-
 Remove default GNOME console.
 
 Set `Ctrl + C` and `Ctrl + V` for copy/paste in new terminal settings.
 
-Fix unnecessary folder creation in Zoom:
-
-```sh
-flatpak override --user us.zoom.Zoom --nofilesystem=~/Documents/Zoom
-mkdir -p ~/.local/share/flatpak/exports/share/applications/
-cp /var/lib/flatpak/exports/share/applications/us.zoom.Zoom.desktop ~/.local/share/flatpak/exports/share/applications/
-```
-
-Replace `Exec` to `/home/ai/Projects/env/bin/zoom @@u %U @@` in `~/.local/share/applications/us.zoom.Zoom.desktop`.
-
-Add Autostart and fingers to user settings.
+Add Autologin and fingers to user settings.
 
 Speed-up boot:
 
@@ -144,9 +126,6 @@ sudo systemctl disable NetworkManager-wait-online.service
 ```
 
 Disable Software auto-update and notifications.
-
-Set [color profile](https://www.notebookcheck.net/uploads/tx_nbc2/BOE0CB4.icm)
-in `Color` settings.
 
 Install `micro` and its plugins:
 
@@ -289,7 +268,7 @@ eval "$(starship init zsh)"
 
 Reboot.
 
-Select `Russian Universal` and `English/Spanish/Catalan Universal` layouts.
+Select `English/Spanish/Catalan Universal` (first) and `Russian Universal` layouts.
 
 ```sh
 rm ~/.bash*
@@ -311,6 +290,9 @@ rmdir ~/backup
 
 Start copying `Vídeos/*` from SDD.
 
+Set [color profile](https://www.notebookcheck.net/uploads/tx_nbc2/BOE0CB4.icm)
+in `Color` settings.
+
 ### Text Editors
 
 Move Claude Code:
@@ -327,6 +309,8 @@ echo "CLAUDE_CONFIG_DIR=$HOME/.local/share/claude" >> ~/.config/environment.d/90
 Sign-in into accounts in Zed.
 
 Install Zed plugins: `ini`, `dockerfile`, `toml`, `svelte`, `make`, `adwaita-pastel`, `material icon theme`, `codebook`, `sql`, `nginx`, `git-firefly`, `pug`, `xml`, `po`, `env`, `oxc`.
+
+Login to NextCloud client to `sync.sitnik.es`.
 
 Open Iotas app, log-in into Nextcloud account.
 
@@ -352,7 +336,7 @@ Open settings:
 - **Search:** keep only Calculator and Settings.
 - **Multitask:** disable Active corners & Hot corner.
 - **Online accounts:** add Google.
-- **Power:** enable Show percentage and disable screen lock.
+- **Power:** enable Show percentage.
 - **Mouse:** mouse speed to 75%, touchpad speed to 90%.
 - **Date and time:** enable seconds and week day on top panel.
 - **Privacy** → disable File History.
@@ -362,8 +346,6 @@ Boost volume over 100%:
 ```sh
 gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
 ```
-
-Login to NextCloud client to `sync.sitnik.es`.
 
 Nautilus:
 
@@ -377,10 +359,11 @@ Disable GNOME extension version check:
 gsettings set org.gnome.shell disable-extension-version-validation true
 ```
 
-Download the latest [`framework_tool`](https://github.com/FrameworkComputer/framework-system/actions?query=branch%3Amain), extract and copy to the system:
+Download the latest [`framework_tool`](https://github.com/FrameworkComputer/framework-system/releases/latest), extract and copy to the system:
 
 ```sh
-sudo cp ~/Descargas/framework_tool /usr/local/bin
+sudo cp ~/Загрузки/framework_tool /usr/local/bin
+sudo chmod a+x /usr/local/bin/framework_tool
 ```
 
 Install tool for clipboard manager:
@@ -397,10 +380,6 @@ Restore settings file from backup:
 ```sh
 ~/Projects/env/bin/restore-gnome-extensions
 ```
-
-Clean up applications list.
-
-Add Iceland NordVPN.
 
 [Disable](https://discussion.fedoraproject.org/t/please-enter-passphrase-for-disk-has-returned/150626/5) disk name in password prompt.
 
@@ -423,7 +402,7 @@ XDG_TEMPLATES_DIR="$HOME/.local/share/templates"
 XDG_PUBLICSHARE_DIR="$HOME/.local/share/desktop"
 XDG_DOCUMENTS_DIR="$HOME/Документы"
 XDG_MUSIC_DIR="$HOME"
-XDG_PICTURES_DIR="$HOME"
+XDG_PICTURES_DIR="$HOME/Загрузки"
 XDG_VIDEOS_DIR="$HOME/Видео"
 ```
 
@@ -436,7 +415,7 @@ echo "" > ~/.config/gtk-3.0/bookmarks
 Remove unnecessary folders:
 
 ```sh
-mkdir "Снимки экрана"
+mkdir "Загрузки/Снимки экрана"
 ```
 
 Connect to server in Files by `sftp://ai@susedko.local/` and add `vault` to Favorites places. Add `Загрузки` and `Снимки экрана` to Favorites places.
@@ -455,7 +434,7 @@ Set icons:
 - `/usr/share/icons/MoreWaita/scalable/places/folder-code.svg`
   for `~/Projects/`.
 - `/usr/share/icons/Adwaita/scalable/places/folder-pictures.svg`
-  for `~/Capturas de pantalla/`.
+  for `~/Загрузки/Снимки экрана/`.
 
 ## Home Server
 
@@ -528,6 +507,8 @@ systemctl --user start susedko-listener.service force-lock.service
 
 ### Development Tools
 
+Install [Zoom](https://zoom.us/download).
+
 Install Node.js, TypeScript, and Dev Containers.
 
 ```sh
@@ -542,6 +523,7 @@ tee -a ~/.local/lib/node/package.json << EOM
 EOM
 cd ~/.local/lib/node && npm install && cd
 
+mkdir -p ~/.local/share/zed_server
 mkdir -p ~/.local/share/multiocular
 mkdir -p ~/.local/share/history
 chmod 700 ~/.local/share/history
@@ -597,10 +579,6 @@ unzip ngram-ru-20150914.zip
 rm ngram*.zip
 ```
 
-```sh
-mkdir -p ~/.config/systemd/user/
-```
-
 Create service unit `~/.config/systemd/user/languagetool.service`:
 
 ```ini
@@ -612,18 +590,11 @@ ExecStart=podman run --rm --replace --name languagetool \
   -p 8081:8010 \
   -e langtool_languageModel=/ngrams \
   -e Java_Xms=512m -e Java_Xmx=2g \
-  -v /home/ai/.local/share/fasttext:/fasttext:Z \
   -v /home/ai/.local/share/ngrams:/ngrams:Z \
   docker.io/erikvl87/languagetool:latest
 
 [Install]
 WantedBy=default.target
-```
-
-Install LanguageTool:
-
-```sh
-~/Projects/env/bin/update-languagetool
 ```
 
 Enable service.
