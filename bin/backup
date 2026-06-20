@@ -15,12 +15,6 @@ echo -e "${TITLE}Сохранение расширений GNOME${GRAY}"
 ~/Projects/env/bin/backup-gnome-extensions
 echo -e "${NC}\n"
 
-echo -e "${TITLE}Сохранение домашнего сервера${GRAY}"
-cd ~/Projects/susedko
-make ha_backup
-cd
-echo -e "${NC}\n"
-
 echo -e "${TITLE}Сохранение файлов${GRAY}"
 export BORG_REPO=ai@susedko.local:/var/mnt/vault/ai/backup
 SERVICE_NAME="BorgBackup"
