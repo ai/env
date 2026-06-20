@@ -2,6 +2,8 @@
 
 ### Preparing
 
+Copy `.ssh` and `.local/share/gnupg` to `Private`.
+
 Download [Fedora image](https://getfedora.org/ru/workstation/)
 and write it to the USB drive:
 
