@@ -93,6 +93,8 @@ RUN echo '{"arrowParens":"avoid","jsxSingleQuote":false,"quoteProps":"consistent
 
 USER developer
 
+COPY --chown=developer:developer starship.toml /home/developer/.config/starship.toml
+
 RUN micro -plugin install editorconfig \
   && mkdir -p /home/developer/.local/share/pnpm/ \
   && printf '%s\n' \

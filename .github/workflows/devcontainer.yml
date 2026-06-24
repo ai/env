@@ -5,6 +5,7 @@ on:
       - main
     paths:
       - devcontainer/Dockerfile
+      - starship.toml
       - .github/workflows/devcontainer.yml
 permissions:
   contents: read
@@ -25,7 +26,7 @@ jobs:
       - name: Build and push the image
         uses: docker/build-push-action@v7
         with:
-          context: devcontainer
+          context: .
           file: devcontainer/Dockerfile
           push: true
           tags: ghcr.io/ai/devcontainer:latest
