@@ -62,7 +62,6 @@ if [ "$1" = "--isolate" ]; then
   cp ~/Projects/env/devcontainer/devcontainer.json .devcontainer.json
   if [ -d .git ]; then
     sed -i '/devcontainer/d' .git/info/exclude
-    echo '.devcontainer.json' >> .git/info/exclude
   fi
   exit
 fi
@@ -107,6 +106,16 @@ if [ "$1" = "--up" ]; then
       "--mount" "type=bind,source=/home/ai/.local/share/zed,target=/home/$username/.local/share/zed"
       "--mount" "type=bind,source=/home/ai/.config/zed,target=/home/$username/.config/zed"
       "--mount" "type=bind,source=/home/ai/.local/share/zed_server,target=/home/$username/.zed_server"
+    )
+  fi
+  mkdir -p /home/ai/.local/share/history
+  devcontainer_args+=(
+    "--mount" "type=bind,source=/home/ai/.local/share/history,target=/home/$username/.local/share/history"
+  )
+  if grep -q "ghcr.io/ai/devcontainer:latest" "$(devcontainer_config $root)"; then
+    mkdir -p /home/ai/.local/share/pnpm/store
+    devcontainer_args+=(
+      "--mount" "type=bind,source=/home/ai/.local/share/pnpm/store,target=/home/$username/.local/share/pnpm/store"
     )
   fi
   devcontainer up "${devcontainer_args[@]}"

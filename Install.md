@@ -527,17 +527,6 @@ mkdir -p ~/.local/share/zed_server
 mkdir -p ~/.local/share/multiocular
 mkdir -p ~/.local/share/history
 chmod 700 ~/.local/share/history
-podman volume create shell-history
-podman volume create pnpm-store
-
-~/Projects/env/bin/build-devcontainer
-cd ~/Projects/nanostores
-devup
-# Find container ID
-podman exec -it --user root $container_id zsh
-mkdir /home/ai/.local/share/pnpm/store/v11
-chown ai:ai /home/ai/.local/share/pnpm/store/v11
-chown ai:ai /home/ai/.local/share/history/histfile
 ```
 
 Fix Dev Container with Podman in Zed:

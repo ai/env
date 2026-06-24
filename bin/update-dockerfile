@@ -32,8 +32,11 @@ if [ "$update_needed" = true ]; then
   podman rmi --all --force
   echo -e "Перезапускаем LanguageTool"
   systemctl restart --user languagetool.service
-  echo -e "${NC}Создаём новый базовый образ Dev Container${GRAY}"
-  ~/Projects/env/bin/build-devcontainer
+  echo -e "${NC}Запускаем сборку образа Dev Container в облаке${GRAY}"
+  cd ~/Projects/env
+  git add devcontainer/Dockerfile
+  git commit -m "Update Dev Container"
+  git push origin main
 else
   echo -e "${GRAY}Нет обновлений для Dev Container${NC}"
 fi

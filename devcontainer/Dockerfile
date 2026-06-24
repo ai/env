@@ -87,14 +87,15 @@ RUN mkdir /usr/local/share/pnpm \
   \
   && chmod +x /usr/local/bin/sfw \
   \
-  && useradd -s /bin/zsh ai
+  && useradd -s /bin/zsh developer
 
 RUN echo '{"arrowParens":"avoid","jsxSingleQuote":false,"quoteProps":"consistent","semi":false,"singleQuote":true,"sortImports":{"groups":["side_effect","side_effect_style","style",["builtin","external","unknown"],["internal","parent","sibling","index"]],"newlinesBetween":true,"order":"asc"},"trailingComma":"none","printWidth":80}' > /.oxfmtrc.json
 
-USER ai
+USER developer
 
 RUN micro -plugin install editorconfig \
-  && mkdir -p /home/ai/.local/share/pnpm/
-
-VOLUME /home/ai/.local/share/pnpm/store
-VOLUME /home/ai/.shell-history
+  && mkdir -p /home/developer/.local/share/pnpm/ \
+  && printf '%s\n' \
+    'export PATH="$HOME/.local/bin:$PATH"' \
+    'eval "$(starship init zsh)"' \
+    > ~/.zshrc

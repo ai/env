@@ -1,16 +1,4 @@
 {
-  "image": "localhost/ai-opensource:latest",
-  "mounts": [
-    {
-      "source": "pnpm-store",
-      "target": "/home/ai/.local/share/pnpm/store",
-      "type": "volume",
-    },
-    {
-      "source": "shell-history",
-      "target": "/home/ai/.local/share/history/",
-      "type": "volume",
-    },
-  ],
+  "image": "ghcr.io/ai/devcontainer:latest",
   "runArgs": ["--net=bridge"],
 }
