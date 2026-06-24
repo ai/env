@@ -1,5 +1,11 @@
 FROM registry.fedoraproject.org/fedora:44
 
+RUN dnf install -yq zsh micro git tig make awk psmisc procps-ng curl \
+  bind-utils iputils iproute libatomic nss dbus-libs atk at-spi2-atk cups-libs \
+  libdrm libXcomposite libXdamage libXrandr mesa-libgbm pango alsa-lib \
+  && dnf clean all \
+  && rm -rf /var/cache/dnf
+
 ENV NODE_VERSION=26.3.1 \
   PNPM_VERSION=11.9.0 \
   NODE_24=24.17.0 \
@@ -24,12 +30,6 @@ ADD https://github.com/atuinsh/atuin/releases/download/v$ATUIN_VERSION/atuin-x86
 ADD https://github.com/starship/starship/releases/download/v$STARSHIP_VERSION/starship-x86_64-unknown-linux-musl.tar.gz /starship.tar.gz
 ADD https://github.com/g-plane/pnpm-shell-completion/releases/download/v$PNPM_COMPETITION_VERSION/pnpm-shell-completion_x86_64-unknown-linux-musl.tar.gz /pnpm-completion.tar.gz
 ADD https://github.com/SocketDev/sfw-free/releases/download/v$SOCKET_FIREWALL_VERSION/sfw-free-linux-x86_64 /usr/local/bin/sfw
-
-RUN dnf install -yq zsh micro git tig make awk psmisc procps-ng curl \
-  bind-utils iputils iproute libatomic nss dbus-libs atk at-spi2-atk cups-libs \
-  libdrm libXcomposite libXdamage libXrandr mesa-libgbm pango alsa-lib \
-  && dnf clean all \
-  && rm -rf /var/cache/dnf
 
 RUN mkdir /usr/local/share/pnpm \
   && tar -xz -f /pnpm.tar.gz -C /usr/local/share/pnpm \
