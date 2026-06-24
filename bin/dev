@@ -55,7 +55,7 @@ function get_username() {
         "$root/.devcontainer/devcontainer.json" | head -n 1
     )
   fi
-  echo "${username:-ai}"
+  echo "${username:-developer}"
 }
 
 if [ "$1" = "--isolate" ]; then
