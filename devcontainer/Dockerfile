@@ -1,5 +1,9 @@
 FROM registry.fedoraproject.org/fedora:44
 
+LABEL org.opencontainers.image.source=https://github.com/ai/env
+LABEL org.opencontainers.image.description="Development environment for JS open source projects"
+LABEL org.opencontainers.image.licenses=MIT
+
 RUN dnf install -yq zsh micro git tig make awk psmisc procps-ng curl \
   bind-utils iputils iproute libatomic nss dbus-libs atk at-spi2-atk cups-libs \
   libdrm libXcomposite libXdamage libXrandr mesa-libgbm pango alsa-lib \
