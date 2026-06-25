@@ -98,10 +98,7 @@ RUN echo '{"arrowParens":"avoid","jsxSingleQuote":false,"quoteProps":"consistent
 USER developer
 
 COPY --chown=developer:developer starship.toml /home/developer/.config/starship.toml
+COPY --chown=developer:developer devcontainer/zshrc /home/developer/.zshrc
 
 RUN micro -plugin install editorconfig \
-  && mkdir -p /home/developer/.local/share/pnpm/ \
-  && printf '%s\n' \
-    'export PATH="$HOME/.local/bin:$PATH"' \
-    'eval "$(starship init zsh)"' \
-    > ~/.zshrc
+  && mkdir -p /home/developer/.local/share/pnpm/
