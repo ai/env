@@ -30,3 +30,10 @@ jobs:
           file: devcontainer/Dockerfile
           push: true
           tags: ghcr.io/ai/devcontainer:latest
+      - name: Clean previous images
+        uses: dataaxiom/ghcr-cleanup-action@v1
+        with:
+          package: devcontainer
+          owner: ai
+          delete-untagged: true
+          token: ${{ secrets.GITHUB_TOKEN }}
