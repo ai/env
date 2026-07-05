@@ -11,6 +11,11 @@ if [[ hour -lt 9 || hour -ge 22 ]]; then
   echo -e "${NC}\n"
 fi
 
+echo -e "${TITLE}Сохранение автоматизаций дома${GRAY}"
+cd ~/Projects/domovoy
+~/Projects/env/bin/dev ./download-automations.ts
+echo -e "${NC}\n"
+
 echo -e "${TITLE}Сохранение расширений GNOME${GRAY}"
 ~/Projects/env/bin/backup-gnome-extensions
 echo -e "${NC}\n"
