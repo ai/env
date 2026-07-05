@@ -50,6 +50,6 @@ if [ "$container_id" == "" ]; then
   exit 1
 fi
 
-zed --new . --wait
+zed --wait --new .
 
 ~/Projects/env/bin/dev --down
