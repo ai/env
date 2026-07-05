@@ -118,7 +118,7 @@ if [ "$1" = "--up" ]; then
       "--mount" "type=bind,source=/home/ai/.local/share/pnpm/store,target=/home/$username/.local/share/pnpm/store"
     )
   fi
-  devcontainer up "${devcontainer_args[@]}"
+  ~/.local/lib/node/node_modules/.bin/devcontainer up "${devcontainer_args[@]}"
 
   if [ -z "$dockerfile_user" ]; then
     container_id=$(get_container_id)

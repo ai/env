@@ -13,7 +13,7 @@ fi
 
 echo -e "${TITLE}Сохранение автоматизаций дома${GRAY}"
 cd ~/Projects/domovoy
-~/Projects/env/bin/dev ./download-automations.ts
+~/Projects/env/bin/dev ./download-ha.ts
 echo -e "${NC}\n"
 
 echo -e "${TITLE}Сохранение расширений GNOME${GRAY}"
