@@ -34,6 +34,7 @@ ADD https://github.com/atuinsh/atuin/releases/download/v$ATUIN_VERSION/atuin-x86
 ADD https://github.com/starship/starship/releases/download/v$STARSHIP_VERSION/starship-x86_64-unknown-linux-musl.tar.gz /starship.tar.gz
 ADD https://github.com/g-plane/pnpm-shell-completion/releases/download/v$PNPM_COMPETITION_VERSION/pnpm-shell-completion_x86_64-unknown-linux-musl.tar.gz /pnpm-completion.tar.gz
 ADD https://github.com/SocketDev/sfw-free/releases/download/v$SOCKET_FIREWALL_VERSION/sfw-free-linux-x86_64 /usr/local/bin/sfw
+ADD https://github.com/anthropics/claude-code/releases/latest/download/claude-linux-x64.tar.gz /claude.tar.gz
 
 RUN mkdir /usr/local/share/pnpm \
   && tar -xz -f /pnpm.tar.gz -C /usr/local/share/pnpm \
@@ -91,6 +92,10 @@ RUN mkdir /usr/local/share/pnpm \
   \
   && chmod +x /usr/local/bin/sfw \
   \
+  && tar -xzf /claude.tar.gz -C /usr/local/bin claude \
+  && chmod +x /usr/local/bin/claude \
+  && rm /claude.tar.gz \
+  \
   && useradd -s /bin/zsh developer
 
 RUN echo '{"arrowParens":"avoid","jsxSingleQuote":false,"quoteProps":"consistent","semi":false,"singleQuote":true,"sortImports":{"groups":["side_effect","side_effect_style","style",["builtin","external","unknown"],["internal","parent","sibling","index"]],"newlinesBetween":true,"order":"asc"},"trailingComma":"none","printWidth":80}' > /.oxfmtrc.json
@@ -101,11 +106,4 @@ COPY --chown=developer:developer starship.toml /home/developer/.config/starship.
 COPY --chown=developer:developer devcontainer/zshrc /home/developer/.zshrc
 
 RUN micro -plugin install editorconfig \
-  && mkdir -p /home/developer/.local/share/pnpm/
-
-RUN curl -fsSL \
-    https://github.com/anthropics/claude-code/releases/latest/download/claude-linux-x64.tar.gz \
-    -o /tmp/claude.tar.gz \
-  && tar -xzf /tmp/claude.tar.gz -C /home/developer/.local/bin claude \
-  && chmod +x /home/developer/.local/bin/claude \
-  && rm /tmp/claude.tar.gz
+  && mkdir -p ~/.local/share/pnpm/
