@@ -4,19 +4,9 @@ LABEL org.opencontainers.image.source=https://github.com/ai/env
 LABEL org.opencontainers.image.description="Development environment for JS open source projects"
 LABEL org.opencontainers.image.licenses=MIT
 
-RUN sudo tee /etc/yum.repos.d/claude-code.repo <<'EOF'
-[claude-code]
-name=Claude Code
-baseurl=https://downloads.claude.ai/claude-code/rpm/stable
-enabled=1
-gpgcheck=1
-gpgkey=https://downloads.claude.ai/keys/claude-code.asc
-EOF
-
 RUN dnf install -yq zsh micro git tig make awk psmisc procps-ng curl \
   bind-utils iputils iproute libatomic nss dbus-libs atk at-spi2-atk cups-libs \
   libdrm libXcomposite libXdamage libXrandr mesa-libgbm pango alsa-lib jq \
-  claude-code \
   && dnf clean all \
   && rm -rf /var/cache/dnf
 
@@ -112,3 +102,10 @@ COPY --chown=developer:developer devcontainer/zshrc /home/developer/.zshrc
 
 RUN micro -plugin install editorconfig \
   && mkdir -p /home/developer/.local/share/pnpm/
+
+RUN curl -fsSL \
+    https://github.com/anthropics/claude-code/releases/latest/download/claude-linux-x64.tar.gz \
+    -o /tmp/claude.tar.gz \
+  && tar -xzf /tmp/claude.tar.gz -C /home/developer/.local/bin claude \
+  && chmod +x /home/developer/.local/bin/claude \
+  && rm /tmp/claude.tar.gz
