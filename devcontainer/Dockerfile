@@ -35,6 +35,7 @@ ADD https://github.com/starship/starship/releases/download/v$STARSHIP_VERSION/st
 ADD https://github.com/g-plane/pnpm-shell-completion/releases/download/v$PNPM_COMPETITION_VERSION/pnpm-shell-completion_x86_64-unknown-linux-musl.tar.gz /pnpm-completion.tar.gz
 ADD https://github.com/SocketDev/sfw-free/releases/download/v$SOCKET_FIREWALL_VERSION/sfw-free-linux-x86_64 /usr/local/bin/sfw
 ADD https://github.com/anthropics/claude-code/releases/latest/download/claude-linux-x64.tar.gz /claude.tar.gz
+ADD https://github.com/openai/codex/releases/latest/download/codex-x86_64-unknown-linux-musl.tar.gz /codex.tar.gz
 
 RUN mkdir /usr/local/share/pnpm \
   && tar -xz -f /pnpm.tar.gz -C /usr/local/share/pnpm \
@@ -95,6 +96,11 @@ RUN mkdir /usr/local/share/pnpm \
   && tar -xzf /claude.tar.gz -C /usr/local/bin claude \
   && chmod +x /usr/local/bin/claude \
   && rm /claude.tar.gz \
+  \
+  && tar -xz -f /codex.tar.gz \
+  && mv codex-x86_64-unknown-linux-musl /usr/local/bin/codex \
+  && chmod +x /usr/local/bin/codex \
+  && rm /codex.tar.gz \
   \
   && useradd -s /bin/zsh developer
 
