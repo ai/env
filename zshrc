@@ -82,10 +82,10 @@ release() {
     return 1
   fi
 
-  git add .
-  git commit -m "Release $VERSION version"
-  git tag -s "$VERSION" -m "$VERSION"
-  git push
+  git add . &&
+    git commit -m "Release $VERSION version" &&
+    git tag -s "$VERSION" -m "$VERSION" &&
+    git push
 }
 
 # Aliases
