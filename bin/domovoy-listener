@@ -1,0 +1,29 @@
+#!/bin/bash
+
+source ~/Projects/domovoy/.env
+
+mosquitto_sub -h "$MQTT_SERVER" -t ai_laptop -u "$MQTT_USER" -P "$MQTT_PASSWORD" | while read -r payload
+do
+  if nmcli -t -f TYPE,STATE device | grep -q "^ethernet:connected"; then
+    echo "Received: $payload"
+    case "$payload" in
+      "LOCK")
+        loginctl lock-session
+        ;;
+      "WAKE")
+        was_locked=$(dbus-send --session \
+          --dest=org.gnome.ScreenSaver \
+          --print-reply \
+          /org/gnome/ScreenSaver \
+          org.gnome.ScreenSaver.GetActive)
+        echo "was_locked: $(echo "$was_locked" | grep -o "boolean true")"
+        if echo "$was_locked" | grep -q "boolean true"; then
+          YDOTOOL_SOCKET=/run/.ydotool_socket ydotool key 1:1 1:0
+        fi
+        ;;
+      *)
+        echo "Unknown command: $payload"
+        ;;
+    esac
+  fi
+done

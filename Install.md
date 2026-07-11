@@ -463,16 +463,16 @@ RestartSec=30s
 WantedBy=default.target
 ```
 
-Add service to `~/.config/systemd/user/susedko-listener.service`:
+Add service to `~/.config/systemd/user/domovoy-listener.service`:
 
 ```ini
 [Unit]
-Description=Susedko Listener
+Description=Domovoy Listener
 After=network-online.target
 Wants=network-online.target
 
 [Service]
-ExecStart=/home/ai/Projects/env/bin/susedko-listener
+ExecStart=/home/ai/Projects/env/bin/domovoy-listener
 Restart=on-failure
 RestartSec=30s
 StartLimitBurst=5
@@ -501,8 +501,8 @@ Enable services:
 ```sh
 sudo systemctl enable ydotoold.service
 sudo systemctl start ydotoold.service
-systemctl --user enable susedko-listener.service force-lock.service
-systemctl --user start susedko-listener.service force-lock.service
+systemctl --user enable domovoy-listener.service force-lock.service
+systemctl --user start domovoy-listener.service force-lock.service
 ```
 
 ### Development Tools
