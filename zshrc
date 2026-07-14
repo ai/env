@@ -121,6 +121,12 @@ if [ -n "$container" ]; then
   if [ -z "$SSH_AUTH_SOCK" ] && [ -S "/run/user/1000/gcr/ssh" ]; then
     export SSH_AUTH_SOCK="/run/user/1000/gcr/ssh"
   fi
+
+  install_claude() {
+    wget rl https://github.com/anthropics/claude-code/releases/latest/download/claude-linux-x64.tar.gz
+    tar -xzf ./claude-linux-x64.tar.gz -C ~/.local/bin claude
+    chmod +x ~/.local/bin/claude
+  }
 else
   export PATH="/home/ai/.local/lib/node/node_modules/.bin/:$PATH"
 
