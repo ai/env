@@ -126,6 +126,7 @@ if [ -n "$container" ]; then
     wget rl https://github.com/anthropics/claude-code/releases/latest/download/claude-linux-x64.tar.gz
     tar -xzf ./claude-linux-x64.tar.gz -C ~/.local/bin claude
     chmod +x ~/.local/bin/claude
+    rm ./claude-linux-x64.tar.gz
   }
 else
   export PATH="/home/ai/.local/lib/node/node_modules/.bin/:$PATH"
