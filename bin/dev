@@ -63,6 +63,14 @@ if [ "$1" = "--isolate" ]; then
   if [ -d .git ]; then
     sed -i '/devcontainer/d' .git/info/exclude
   fi
+  mkdir -p .claude
+  cat > .claude/settings.local.json <<'EOF'
+{
+  "permissions": {
+    "defaultMode": "bypassPermissions"
+  }
+}
+EOF
   exit
 fi
 
