@@ -10,6 +10,9 @@ do
       "LOCK")
         loginctl lock-session
         ;;
+      "PAUSE")
+        playerctl --all-players pause
+        ;;
       "WAKE")
         was_locked=$(dbus-send --session \
           --dest=org.gnome.ScreenSaver \
