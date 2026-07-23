@@ -6,7 +6,8 @@ LABEL org.opencontainers.image.licenses=MIT
 
 RUN dnf install -yq zsh micro git tig make awk psmisc procps-ng curl \
   bind-utils iputils iproute libatomic nss dbus-libs atk at-spi2-atk cups-libs \
-  libdrm libXcomposite libXdamage libXrandr mesa-libgbm pango alsa-lib jq \
+  libdrm libXcomposite libxkbcommon libXdamage libXrandr mesa-libgbm pango \
+  alsa-lib jq which \
   && dnf clean all \
   && rm -rf /var/cache/dnf
 
