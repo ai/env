@@ -29,7 +29,7 @@ if [ -d "$XDG_DATA_HOME/claude" ]; then
   export CLAUDE_CONFIG_DIR="$XDG_DATA_HOME/claude"
 fi
 if [ -d "$XDG_DATA_HOME/codex" ]; then
-  export CODEX_HOME="$XDG_DATA_HOME/claude"
+  export CODEX_HOME="$XDG_DATA_HOME/codex"
 fi
 
 # Completion
