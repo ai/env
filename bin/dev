@@ -110,7 +110,7 @@ if [ "$1" = "--up" ]; then
   fi
   if [ -d /home/ai/.local/share/codex ]; then
     devcontainer_args+=(
-      "--mount" "type=bind,source=/home/ai/.local/share/claude,target=/home/$username/.codex"
+      "--mount" "type=bind,source=/home/ai/.local/share/codex,target=/home/$username/.codex"
     )
   fi
   if [ -d /home/ai/.local/share/zed ]; then
