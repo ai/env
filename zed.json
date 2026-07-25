@@ -1,4 +1,7 @@
 {
+  "context_servers": {
+    
+  },
   "cli_default_open_behavior": "existing_window",
   "outline_panel": {
     "dock": "left"
@@ -14,10 +17,13 @@
   },
   "diff_view_style": "split",
   "agent_servers": {
+    "codex-acp": {
+      "type": "registry"
+    },
     "claude-acp": {
       "default_config_options": {
         "model": "opus",
-        "mode": "bypassPermissions"
+        "mode": "acceptEdits"
       },
       "type": "registry"
     }
@@ -34,6 +40,8 @@
   "show_completions_on_input": true,
   "buffer_font_family": "Lilex",
   "agent": {
+    "terminal_init_command": "claude",
+    "sidebar_side": "right",
     "dock": "right",
     "tool_permissions": {
       "default": "allow"
