@@ -126,10 +126,14 @@ if [ -n "$container" ]; then
   fi
 
   install_claude() {
-    wget rl https://github.com/anthropics/claude-code/releases/latest/download/claude-linux-x64.tar.gz
+    curl -fL \
+      -o ./claude-linux-x64.tar.gz \
+      https://github.com/anthropics/claude-code/releases/latest/download/claude-linux-x64.tar.gz
+
+    mkdir -p ~/.local/bin
     tar -xzf ./claude-linux-x64.tar.gz -C ~/.local/bin claude
     chmod +x ~/.local/bin/claude
-    rm ./claude-linux-x64.tar.gz
+    rm -f ./claude-linux-x64.tar.gz
   }
 else
   export PATH="/home/ai/.local/lib/node/node_modules/.bin/:$PATH"
