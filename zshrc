@@ -135,6 +135,18 @@ if [ -n "$container" ]; then
     chmod +x ~/.local/bin/claude
     rm -f ./claude-linux-x64.tar.gz
   }
+
+  install_codex() {
+    curl -fL \
+      -o ./codex-x86_64-unknown-linux-musl.tar.gz \
+      https://github.com/openai/codex/releases/latest/download/codex-x86_64-unknown-linux-musl.tar.gz
+
+    mkdir -p ~/.local/bin
+    tar -xzf ./codex-x86_64-unknown-linux-musl.tar.gz
+    mv ./codex-x86_64-unknown-linux-musl ~/.local/bin/codex
+    chmod +x ~/.local/bin/codex
+    rm -f ./codex-x86_64-unknown-linux-musl.tar.gz
+  }
 else
   export PATH="/home/ai/.local/lib/node/node_modules/.bin/:$PATH"
 
