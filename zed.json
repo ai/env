@@ -1,7 +1,5 @@
 {
-  "context_servers": {
-    
-  },
+  "context_servers": {},
   "cli_default_open_behavior": "existing_window",
   "outline_panel": {
     "dock": "left"
@@ -67,7 +65,8 @@
   },
   "icon_theme": "Material Icon Theme",
   "terminal": {
-    "dock": "right"
+    "dock": "right",
+    "bell": "system"
   },
   "soft_wrap": "preferred_line_length",
   "preferred_line_length": 80,

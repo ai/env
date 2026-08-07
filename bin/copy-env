@@ -9,11 +9,13 @@ if [ "$1" == "system" ]; then
   mkdir -p ~/.config/git/
   mkdir -p ~/.config/micro/
   mkdir -p ~/.config/zed/
+  mkdir -p ~/.local/share/claude/
   rm -f ~/.zshrc
   ln ~/Projects/env/zshrc ~/.zshrc
   cp ~/Projects/env/.oxfmtrc.json ~/.oxfmtrc.json
   cp ~/Projects/env/zed.json ~/.config/zed/settings.json
   cp ~/Projects/env/zed-keys.json ~/.config/zed/keymap.json
+  cp ~/Projects/env/claude.json ~/.local/share/claude/settings.json
   cp ~/Projects/env/mpv.conf ~/.config/mpv/mpv.conf
   cp ~/Projects/env/ripgreprc ~/.config/ripgreprc
   cp ~/Projects/env/sshconfig ~/.ssh/config
@@ -40,6 +42,7 @@ else
   cp ~/.local/share/applications/*.{svg,desktop} ~/Projects/env/icons/
   cp ~/.config/zed/settings.json ~/Projects/env/zed.json
   cp ~/.config/zed/keymap.json ~/Projects/env/zed-keys.json
+  cp ~/.local/share/claude/settings.json ~/Projects/env/claude.json
   rm ~/Projects/env/icons/chrome-* -f
   rm ~/Projects/env/icons/userapp-* -f
   rm ~/Projects/env/icons/org.gnome.Shell.Extensions.* -f

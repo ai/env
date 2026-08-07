@@ -1,0 +1,6 @@
+{
+  "model": "opus[1m]",
+  "skipDangerousModePermissionPrompt": true,
+  "theme": "auto",
+  "preferredNotifChannel": "terminal_bell"
+}
