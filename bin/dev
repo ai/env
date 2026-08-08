@@ -227,9 +227,13 @@ else
   fi
   workdir="/workspaces/$(basename $root)/$subdir"
   username=$(get_username)
+  exec_env_args=("-e" "HOME=/home/$username")
+  if [[ -v DEBUG ]]; then
+    exec_env_args+=("-e" "DEBUG=$DEBUG")
+  fi
   if [ -z "$1" ]; then
-    $runtime exec -u "$username" -e HOME="/home/$username" -w $workdir -it $container_id zsh
+    $runtime exec -u "$username" "${exec_env_args[@]}" -w "$workdir" -it "$container_id" zsh
   else
-    $runtime exec -u "$username" -e HOME="/home/$username" -w $workdir -it $container_id zsh -ic "$*"
+    $runtime exec -u "$username" "${exec_env_args[@]}" -w "$workdir" -it "$container_id" zsh -ic "$*"
   fi
 fi
