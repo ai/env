@@ -7,12 +7,12 @@ LABEL org.opencontainers.image.licenses=MIT
 RUN dnf install -yq zsh micro git gh tig make awk psmisc procps-ng curl \
   bind-utils iputils iproute libatomic nss dbus-libs atk at-spi2-atk cups-libs \
   libdrm libXcomposite libxkbcommon libXdamage libXrandr mesa-libgbm pango \
-  alsa-lib jq which \
+  alsa-lib jq which file lsof strace nmap-ncat \
   && dnf clean all \
   && rm -rf /var/cache/dnf
 
 ENV NODE_VERSION=26.7.0 \
-  PNPM_VERSION=11.20.0 \
+  PNPM_VERSION=11.21.0 \
   NODE_24=24.17.0 \
   NODE_22=22.23.0 \
   DIFFT_VERSION=0.69.0 \
