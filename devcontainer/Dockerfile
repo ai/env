@@ -13,15 +13,15 @@ RUN dnf install -yq zsh micro git gh tig make awk psmisc procps-ng curl \
 
 ENV NODE_VERSION=26.7.0 \
   PNPM_VERSION=12.0.0-rc.5 \
-  NODE_24=24.17.0 \
-  NODE_22=22.23.0 \
-  DIFFT_VERSION=0.69.0 \
+  NODE_24=24.19.0 \
+  NODE_22=22.22.3 \
+  DIFFT_VERSION=0.70.0 \
   BAT_VERSION=0.26.1 \
-  RG_VERSION=15.1.0 \
-  ATUIN_VERSION=18.16.1 \
+  RG_VERSION=15.2.0 \
+  ATUIN_VERSION=18.19.0 \
   STARSHIP_VERSION=1.26.0 \
   PNPM_COMPETITION_VERSION=0.5.5 \
-  SOCKET_FIREWALL_VERSION=1.12.0
+  SOCKET_FIREWALL_VERSION=1.15.0
 
 ADD https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.gz /node.tar.xz
 ADD https://nodejs.org/dist/v${NODE_24}/node-v${NODE_24}-linux-x64.tar.gz /node24.tar.xz
