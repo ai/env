@@ -40,3 +40,5 @@
   algorithm = histogram
   colorMoved = true
   indentHeuristic = true
+[url "git@github.com:"]
+  insteadOf = https://github.com/
