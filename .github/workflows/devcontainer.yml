@@ -5,8 +5,15 @@ on:
       - main
     paths:
       - devcontainer/Dockerfile
-      - starship.toml
       - .github/workflows/devcontainer.yml
+      - zshrc
+      - devcontainer/bashrc
+      - ripgreprc
+      - gitconfig
+      - batconfig
+      - gitignore
+      - starship.toml
+      - pnpm-config.yaml
 permissions:
   contents: read
   packages: write
