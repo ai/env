@@ -111,6 +111,7 @@ x-scheme-handler/nc=com.nextcloud.desktopclient.nextcloud.desktop;
 text/x-opml+xml=zed.desktop;
 application/atom+xml=zed.desktop;
 application/rss+xml=zed.desktop;
+text/plain=dev.zed.Zed.desktop;
 
 [Default Applications]
 video/x-matroska=mpv.desktop
@@ -228,3 +229,4 @@ application/pdf=org.gnome.Papers.desktop
 text/x-opml+xml=zed.desktop
 application/atom+xml=zed.desktop
 application/rss+xml=zed.desktop
+text/plain=dev.zed.Zed.desktop

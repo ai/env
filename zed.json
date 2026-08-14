@@ -16,6 +16,9 @@
   "diff_view_style": "split",
   "agent_servers": {
     "codex-acp": {
+      "default_config_options": {
+        "reasoning_effort": "max"
+      },
       "type": "registry"
     },
     "claude-acp": {
