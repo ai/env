@@ -1,5 +1,5 @@
 blockExoticSubdeps: true
 minimumReleaseAge: 1440
 storeDir: ~/.local/share/pnpm/store
-trustPolicy: true
-trustPolicyIgnoreAfter: true
+trustPolicy: no-downgrade
+trustPolicyIgnoreAfter: 10080
