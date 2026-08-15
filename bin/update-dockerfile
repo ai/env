@@ -3,10 +3,21 @@
 DOCKERFILE_PATH="/home/ai/Projects/env/devcontainer/Dockerfile"
 
 latest_node=$(curl -s "https://nodejs.org/dist/index.json" | jq -r '.[0].version' | sed 's/v//')
-latest_pnpm=$(curl -s "https://api.github.com/repos/pnpm/pnpm/releases/latest" | jq -r '.tag_name' | sed 's/v//')
+latest_pnpm_stable=$(curl -s "https://api.github.com/repos/pnpm/pnpm/releases/latest" | jq -r '.tag_name' | sed 's/v//')
 
 current_node=$(grep -oP 'NODE_VERSION=\K[^ \\]+' "$DOCKERFILE_PATH")
 current_pnpm=$(grep -oP 'PNPM_VERSION=\K[^ \\]+' "$DOCKERFILE_PATH")
+
+latest_pnpm="$latest_pnpm_stable"
+if [[ "$current_pnpm" == *-rc.* ]] &&
+  [[ -n "$latest_pnpm_stable" ]] &&
+  [[ "$latest_pnpm_stable" != "null" ]] &&
+  [[ "$(printf '%s\n' "$latest_pnpm_stable" "${current_pnpm%%-*}" | sort -V | tail -n 1)" == "${current_pnpm%%-*}" ]] &&
+  [[ "$latest_pnpm_stable" != "${current_pnpm%%-*}" ]]; then
+  latest_pnpm=$(curl -s "https://api.github.com/repos/pnpm/pnpm/releases?per_page=100" |
+    jq -r '[.[] | select(.draft == false and .prerelease == true)][0].tag_name // empty' |
+    sed 's/v//')
+fi
 
 update_needed=false
 
