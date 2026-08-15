@@ -383,6 +383,36 @@ Restore settings file from backup:
 
 [Disable](https://discussion.fedoraproject.org/t/please-enter-passphrase-for-disk-has-returned/150626/5) disk name in password prompt.
 
+Add ethernet-WiFi switching:
+
+```sh
+sudo tee /etc/NetworkManager/dispatcher.d/90-wifi-ethernet >/dev/null <<'EOF'
+#!/usr/bin/bash
+
+export LC_ALL=C
+
+ACTION="${2:-}"
+
+case "$ACTION" in
+    up|down)
+        if /usr/bin/nmcli -t -f TYPE,STATE device status \
+            | /usr/bin/grep -qx 'ethernet:connected'; then
+
+            echo "90-wifi-ethernet: Ethernet connected -> Wi-Fi OFF" >&2
+            /usr/bin/nmcli radio wifi off
+        else
+            echo "90-wifi-ethernet: no Ethernet -> Wi-Fi ON" >&2
+            /usr/bin/nmcli radio wifi on
+        fi
+        ;;
+esac
+EOF
+
+sudo chown root:root /etc/NetworkManager/dispatcher.d/90-wifi-ethernet
+sudo chmod 755 /etc/NetworkManager/dispatcher.d/90-wifi-ethernet
+sudo restorecon -v /etc/NetworkManager/dispatcher.d/90-wifi-ethernet
+```
+
 ### Folders
 
 Create empty file template:
