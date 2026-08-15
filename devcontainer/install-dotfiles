@@ -31,7 +31,6 @@ mkdir -p ~/.config/pnpm
 
 cp -f ~/dotfiles/zshrc ~/.zshrc
 cp -f ~/dotfiles/devcontainer/bashrc ~/.bashrc
-cp -f ~/dotfiles/gitconfig ~/.config/git/config
 cp -f ~/dotfiles/ripgreprc ~/.config/ripgreprc
 cp -f ~/dotfiles/micro.json ~/.config/micro/settings.json
 cp -f ~/dotfiles/batconfig ~/.config/bat/config
@@ -39,8 +38,6 @@ cp -f ~/dotfiles/gitignore ~/.config/git/ignore
 cp -f ~/dotfiles/starship.toml ~/.config/starship.toml
 cp -f ~/dotfiles/pnpm-config.yaml ~/.config/pnpm/config.yaml
 sed -i '/^\s*\$username\\/d;/^\s*\$hostname\\/d' ~/.config/starship.toml
-
-git config set core.hooksPath ".git/hooks"
 
 mkdir -p ~/.ssh
 chmod 700 ~/.ssh
@@ -159,3 +156,7 @@ if cmd_exists git && cmd_exists zsh; then
     rm ~/pnpm-completion.tar.gz
   fi
 fi
+
+# Git config has a fix for pnpm which has an issue with other git commands
+cp -f ~/dotfiles/gitconfig ~/.config/git/config
+git config set core.hooksPath ".git/hooks"
