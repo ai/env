@@ -110,6 +110,7 @@ alias pn='dev pnpm'
 alias pnx='dev sfw pnpm dlx'
 alias pui='pnpm update --interactive --latest -r'
 alias pu='pnpm update -r'
+alias pua='pnpm update --interactive --latest - --include-github-actions'
 alias pui1='pnpm update --interactive --latest'
 alias pu1='pnpm update'
 
