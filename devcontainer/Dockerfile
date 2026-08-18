@@ -20,7 +20,7 @@ ENV NODE_VERSION=26.7.0 \
   RG_VERSION=15.2.0 \
   ATUIN_VERSION=18.19.0 \
   STARSHIP_VERSION=1.26.0 \
-  PNPM_COMPETITION_VERSION=0.5.5 \
+  PNPM_COMPLETION_VERSION=0.5.5 \
   SOCKET_FIREWALL_VERSION=1.15.0
 
 ADD https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.gz /node.tar.xz
@@ -33,7 +33,7 @@ ADD https://github.com/sharkdp/bat/releases/download/v$BAT_VERSION/bat-v$BAT_VER
 ADD https://github.com/BurntSushi/ripgrep/releases/download/$RG_VERSION/ripgrep-$RG_VERSION-x86_64-unknown-linux-musl.tar.gz /rg.tar.gz
 ADD https://github.com/atuinsh/atuin/releases/download/v$ATUIN_VERSION/atuin-x86_64-unknown-linux-musl.tar.gz /atuin.tar.gz
 ADD https://github.com/starship/starship/releases/download/v$STARSHIP_VERSION/starship-x86_64-unknown-linux-musl.tar.gz /starship.tar.gz
-ADD https://github.com/g-plane/pnpm-shell-completion/releases/download/v$PNPM_COMPETITION_VERSION/pnpm-shell-completion_x86_64-unknown-linux-musl.tar.gz /pnpm-completion.tar.gz
+ADD https://github.com/g-plane/pnpm-shell-completion/releases/download/v$PNPM_COMPLETION_VERSION/pnpm-shell-completion_x86_64-unknown-linux-musl.tar.gz /pnpm-completion.tar.gz
 ADD https://github.com/SocketDev/sfw-free/releases/download/v$SOCKET_FIREWALL_VERSION/sfw-free-linux-x86_64 /usr/local/bin/sfw
 ADD https://github.com/anthropics/claude-code/releases/latest/download/claude-linux-x64.tar.gz /claude.tar.gz
 ADD https://github.com/openai/codex/releases/latest/download/codex-x86_64-unknown-linux-musl.tar.gz /codex.tar.gz
