@@ -1,2 +1,6 @@
 export PATH="$HOME/.local/bin:$PATH"
 eval "$(starship init zsh)"
+
+autoload -Uz compinit
+compinit -i
+source /usr/local/lib/zsh/pnpm-shell-completion/pnpm-shell-completion.plugin.zsh

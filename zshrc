@@ -119,7 +119,9 @@ if [ -n "$container" ]; then
     export PATH="$PNPM_HOME/bin/:$PATH"
   fi
   alias dev='command'
-  alias pnpm='sfw pnpm'
+  pnpm() {
+    sfw pnpm "$@"
+  }
 
   if [ -z "$SSH_AUTH_SOCK" ] && [ -S "/run/user/1000/gcr/ssh" ]; then
     export SSH_AUTH_SOCK="/run/user/1000/gcr/ssh"
@@ -153,7 +155,9 @@ else
   alias dev='/home/ai/Projects/env/bin/dev'
   alias devup='dev --up'
   alias devdown='dev --down'
-  alias pnpm='dev sfw pnpm'
+  pnpm() {
+    dev sfw pnpm "$@"
+  }
   alias node='dev node'
   alias multiocular='dev --port pnpm multiocular'
 
