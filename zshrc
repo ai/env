@@ -156,7 +156,7 @@ else
   alias devup='dev --up'
   alias devdown='dev --down'
   pnpm() {
-    dev sfw pnpm "$@"
+    /home/ai/Projects/env/bin/dev sfw pnpm "$@"
   }
   alias node='dev node'
   alias multiocular='dev --port pnpm multiocular'
