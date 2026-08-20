@@ -37,6 +37,7 @@ ADD https://github.com/g-plane/pnpm-shell-completion/releases/download/v$PNPM_CO
 ADD https://github.com/SocketDev/sfw-free/releases/download/v$SOCKET_FIREWALL_VERSION/sfw-free-linux-x86_64 /usr/local/bin/sfw
 ADD https://github.com/anthropics/claude-code/releases/latest/download/claude-linux-x64.tar.gz /claude.tar.gz
 ADD https://github.com/openai/codex/releases/latest/download/codex-x86_64-unknown-linux-musl.tar.gz /codex.tar.gz
+ADD https://github.com/openai/codex/releases/latest/download/codex-code-mode-host-x86_64-unknown-linux-musl.tar.gz /codex-code-mode-host.tar.gz
 
 RUN mkdir /usr/local/share/pnpm \
   && tar -xz -f /pnpm.tar.gz -C /usr/local/share/pnpm \
@@ -102,6 +103,11 @@ RUN mkdir /usr/local/share/pnpm \
   && mv codex-x86_64-unknown-linux-musl /usr/local/bin/codex \
   && chmod +x /usr/local/bin/codex \
   && rm /codex.tar.gz \
+  \
+  && tar -xz -f /codex-code-mode-host.tar.gz \
+  && mv codex-code-mode-host-x86_64-unknown-linux-musl /usr/local/bin/codex-code-mode-host \
+  && chmod +x /usr/local/bin/codex-code-mode-host \
+  && rm /codex-code-mode-host.tar.gz \
   \
   && useradd -s /bin/zsh developer
 
