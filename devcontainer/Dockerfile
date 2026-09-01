@@ -12,7 +12,7 @@ RUN dnf install -yq zsh micro git gh tig make awk psmisc procps-ng curl \
   && rm -rf /var/cache/dnf
 
 ENV NODE_VERSION=26.8.1 \
-  PNPM_VERSION=12.1.0 \
+  PNPM_VERSION=12.2.1 \
   NODE_24=24.19.0 \
   NODE_22=22.22.3 \
   DIFFT_VERSION=0.70.0 \
