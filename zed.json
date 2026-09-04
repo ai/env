@@ -1,5 +1,23 @@
 {
   "context_servers": {},
+  "auto_install_extensions": {
+    "adwaita-pastel": true,
+    "codebook": true,
+    "dockerfile": true,
+    "env": true,
+    "git-firefly": true,
+    "ini": true,
+    "make": true,
+    "material-icon-theme": true,
+    "nginx": true,
+    "oxc": true,
+    "po": true,
+    "pug": true,
+    "sql": true,
+    "svelte": true,
+    "toml": true,
+    "xml": true
+  },
   "cli_default_open_behavior": "existing_window",
   "outline_panel": {
     "dock": "left"
