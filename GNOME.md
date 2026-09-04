@@ -10,6 +10,7 @@
 - [Battery Usage Wattmeter](https://extensions.gnome.org/extension/6278/battery-usage-wattmeter/)
 - [Bluetooth Battery Monitor](https://extensions.gnome.org/extension/9308/bluetooth-battery-monitor/)
 - [Blur my Shell](https://extensions.gnome.org/extension/3193/blur-my-shell/)
+- [Calendar Reminders](https://extensions.gnome.org/extension/10791/calendar-reminders/)
 - [Copyous](https://extensions.gnome.org/extension/8834/copyous/)
 - [Dim Completed Calendar Events](https://extensions.gnome.org/extension/5979/dim-completed-calendar-events/)
 - [Do Not Disturb While Screen Sharing Or Recording](https://extensions.gnome.org/extension/5985/do-not-disturb-while-screen-sharing-or-recording/)
