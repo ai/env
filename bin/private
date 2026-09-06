@@ -9,7 +9,7 @@ LINK=$HOME/Private
 if [ -e "$LINK" ]; then
   # Lock
   fusermount -u "$LINK"
-  rm -R "$LINK"
+  rmdir "$LINK"
 else
   # Unlock
   mkdir "$LINK"
