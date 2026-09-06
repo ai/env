@@ -1,6 +1,8 @@
 #!/bin/sh
 # Private encrypted folder
 
+set -e
+
 STORE=$HOME/Документы/.Private
 LINK=$HOME/Private
 
