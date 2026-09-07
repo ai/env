@@ -139,15 +139,16 @@ if [ -n "$container" ]; then
   }
 
   install_codex() {
-    curl -fL \
-      -o ./codex-x86_64-unknown-linux-musl.tar.gz \
-      https://github.com/openai/codex/releases/latest/download/codex-x86_64-unknown-linux-musl.tar.gz
+    for binary in codex codex-code-mode-host; do
+      curl -fL \
+        -o ./$binary-x86_64-unknown-linux-musl.tar.gz \
+        https://github.com/openai/codex/releases/latest/download/$binary-x86_64-unknown-linux-musl.tar.gz
 
-    mkdir -p ~/.local/bin
-    tar -xzf ./codex-x86_64-unknown-linux-musl.tar.gz
-    mv ./codex-x86_64-unknown-linux-musl ~/.local/bin/codex
-    chmod +x ~/.local/bin/codex
-    rm -f ./codex-x86_64-unknown-linux-musl.tar.gz
+      tar -xzf ./$binary-x86_64-unknown-linux-musl.tar.gz
+      mv ./$binary-x86_64-unknown-linux-musl ~/.local/bin/$binary
+      chmod +x ~/.local/bin/$binary
+      rm -f ./$binary-x86_64-unknown-linux-musl.tar.gz
+    done
   }
 else
   export PATH="/home/ai/.local/lib/node/node_modules/.bin/:$PATH"
