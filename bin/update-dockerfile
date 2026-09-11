@@ -49,10 +49,14 @@ if [ "$update_needed" = true ]; then
   git add devcontainer/Dockerfile
   git commit -m "Update Dev Container"
   git push origin main
-  echo -e "Удаляем все старые образы"
-  podman rmi --all --force
-  echo -e "Перезапускаем LanguageTool"
-  systemctl restart --user languagetool.service
+  if pgrep -x -u "$UID" zed >/dev/null; then
+    echo -e "Открыт проект — пропускаем удаление образов"
+  else
+    echo -e "Удаляем все старые образы"
+    podman rmi --all --force
+    echo -e "Перезапускаем LanguageTool"
+    systemctl restart --user languagetool.service
+  fi
 else
   echo -e "${GRAY}Нет обновлений для Dev Container${NC}"
 fi
