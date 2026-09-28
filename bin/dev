@@ -74,12 +74,18 @@ fi
 
 if [ "$1" = "--up" ]; then
   runtime=$(get_container_runtime)
+  devcontainer_runtime=$runtime
+  if [ "$runtime" = "podman" ]; then
+    devcontainer_runtime="$(dirname "$(readlink -f "$0")")/../devcontainer/podman"
+    DEVCONTAINER_PODMAN_EVENTS_SINCE=$(date -u +'%Y-%m-%dT%H:%M:%S.%NZ')
+    export DEVCONTAINER_PODMAN_EVENTS_SINCE
+  fi
   username=$(get_username)
   dockerfile_user=$(get_dockerfile_user)
   dotfiles_repo="https://github.com/ai/env.git"
   dotfiles_cmd="devcontainer/install-dotfiles"
   devcontainer_args=(
-    "--docker-path" "$runtime"
+    "--docker-path" "$devcontainer_runtime"
     "--mount" "type=bind,source=${SSH_AUTH_SOCK},target=/run/user/1000/gcr/ssh"
     "--workspace-folder" "$root"
     "--config" "$(devcontainer_config $root)"

@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Replay startup events if the CLI's listener subscribes after the container starts.
+# https://github.com/devcontainers/cli/issues/1236
+if [ "$1" = "events" ] && [ -n "$DEVCONTAINER_PODMAN_EVENTS_SINCE" ]; then
+  for arg in "$@"; do
+    case "$arg" in
+      --since|--since=*) exec podman "$@" ;;
+    esac
+  done
+  exec podman "$@" --since "$DEVCONTAINER_PODMAN_EVENTS_SINCE"
+fi
+
+exec podman "$@"
