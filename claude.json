@@ -1,9 +1,9 @@
 {
   "permissions": {
-    "defaultMode": "bypassPermissions"
+    "defaultMode": "auto"
   },
-  "model": "opus[1m]",
+  "model": "opus",
+  "skipDangerousModePermissionPrompt": true,
   "theme": "auto",
-  "preferredNotifChannel": "terminal_bell",
-  "skipDangerousModePermissionPrompt": true
+  "preferredNotifChannel": "terminal_bell"
 }
