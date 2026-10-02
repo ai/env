@@ -2,6 +2,7 @@
 
 - [Alphabetical App Grid](https://extensions.gnome.org/extension/4269/alphabetical-app-grid/)
 - [App Hider](https://extensions.gnome.org/extension/5895/app-hider/)
+- [AppIndicator and KStatusNotifierItem Support](https://extensions.gnome.org/extension/615/appindicator-support/)
 - [Auto Power Profile](https://extensions.gnome.org/extension/6583/auto-power-profile/)
 - [Autohide Battery](https://extensions.gnome.org/extension/595/autohide-battery/)
 - [Battery Health Charging](https://extensions.gnome.org/extension/5724/battery-health-charging/)
@@ -29,6 +30,7 @@
 - [Overview on empty workspace](https://extensions.gnome.org/extension/8974/overview-on-empty-workspace/)
 - [Quick Settings Tweaks](https://extensions.gnome.org/extension/5446/quick-settings-tweaker/)
 - [Shotzy](https://extensions.gnome.org/extension/9707/shotzy/)
+- [System Monitor](https://extensions.gnome.org/extension/10372/system-monitor-panel/)
 - [Top Panel Workspace Scroll](https://extensions.gnome.org/extension/701/top-panel-workspace-scroll/)
 - [Translit Search](https://extensions.gnome.org/extension/10066/translit-search/)
 - [Tweaks & Extensions in System Menu](https://extensions.gnome.org/extension/1653/tweaks-in-system-menu/)
