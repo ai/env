@@ -60,8 +60,8 @@
   "buffer_font_family": "Lilex",
   "agent": {
     "terminal_init_command": "claude",
-    "sidebar_side": "right",
-    "dock": "right",
+    "sidebar_side": "left",
+    "dock": "left",
     "tool_permissions": {
       "default": "allow"
     },
@@ -86,7 +86,7 @@
   },
   "icon_theme": "Material Icon Theme",
   "terminal": {
-    "dock": "right",
+    "dock": "bottom",
     "bell": "system"
   },
   "soft_wrap": "preferred_line_length",
