@@ -49,7 +49,7 @@ if [ "$update_needed" = true ]; then
   git add devcontainer/Dockerfile
   git commit -m "Update Dev Container"
   git push origin main
-  if pgrep -x -u "$UID" zed >/dev/null; then
+  if pgrep -x -u "$UID" 'zed|zed-editor' >/dev/null; then
     echo -e "Открыт проект — пропускаем удаление образов"
   else
     echo -e "Удаляем все старые образы"
