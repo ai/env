@@ -1,0 +1,13 @@
+%YAML 1.3
+---
+- Key: [Back Button, pressed]
+- KeyPress: [[Control_L, v], click]
+...
+---
+- Key: [Forward Button, pressed]
+- KeyPress: [[Control_L, c], click]
+...
+---
+- Key: [Haptic, pressed]
+- KeyPress: [Super_L, click]
+...

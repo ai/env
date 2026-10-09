@@ -95,7 +95,7 @@ sudo dnf swap mesa-va-drivers mesa-va-drivers-freeworld
 sudo dnf swap mesa-vdpau-drivers mesa-vdpau-drivers-freeworld
 sudo dnf copr enable dusansimic/themes
 sudo dnf copr enable hyperreal/better_fonts
-sudo dnf install xclip micro fuse-encfs zenity borgbackup openssl ffmpegthumbnailer nss-tools mosquitto ydotool amrnb amrwb faac faad2 flac gstreamer1-libav gstreamer1-plugins-bad-freeworld gstreamer-ffmpeg gstreamer-plugins-bad-nonfree gstreamer-plugins-espeak gstreamer-plugins-ugly lame libdca libmad libmatroska x264 x265 xvidcore gstreamer1-plugins-bad-free gstreamer1-plugins-base gstreamer1-plugins-good gstreamer-plugins-bad gstreamer1-plugins-ugly-free mpv ffmpeg xorg-x11-drv-intel intel-media-driver webp-pixbuf-loader heif-pixbuf-loader avif-pixbuf-loader libheif-freeworld ffmpeg-libs libva libva-utils gstreamer1-vaapi mozilla-openh264 libheif-tools unrar p7zip p7zip-plugins speech-dispatcher speech-dispatcher-utils google-chrome-stable nodejs podman git tig ripgrep xkill bat make difftastic nextcloud-client zsh util-linux-user starship eza atuin sqlite  morewaita-icon-theme nethogs fuse-sshfs logiops libgda libgda-sqlite playerctl cabextract xorg-x11-font-utils tesseract tesseract-devel zed podman-compose sgdisk tesseract-langpack-rus zbar android-tools mesa-va-drivers-freeworld vulkan-tools ollama-vulkan solaar
+sudo dnf install xclip micro fuse-encfs zenity borgbackup openssl ffmpegthumbnailer nss-tools mosquitto ydotool amrnb amrwb faac faad2 flac gstreamer1-libav gstreamer1-plugins-bad-freeworld gstreamer-ffmpeg gstreamer-plugins-bad-nonfree gstreamer-plugins-espeak gstreamer-plugins-ugly lame libdca libmad libmatroska x264 x265 xvidcore gstreamer1-plugins-bad-free gstreamer1-plugins-base gstreamer1-plugins-good gstreamer-plugins-bad gstreamer1-plugins-ugly-free mpv ffmpeg xorg-x11-drv-intel intel-media-driver webp-pixbuf-loader heif-pixbuf-loader avif-pixbuf-loader libheif-freeworld ffmpeg-libs libva libva-utils gstreamer1-vaapi mozilla-openh264 libheif-tools unrar p7zip p7zip-plugins speech-dispatcher speech-dispatcher-utils google-chrome-stable nodejs podman git tig ripgrep xkill bat make difftastic nextcloud-client zsh util-linux-user starship eza atuin sqlite  morewaita-icon-theme nethogs fuse-sshfs libgda libgda-sqlite playerctl cabextract xorg-x11-font-utils tesseract tesseract-devel zed podman-compose sgdisk tesseract-langpack-rus zbar android-tools mesa-va-drivers-freeworld vulkan-tools ollama-vulkan solaar
 sudo rpm -ivh --nodigest --nofiledigest https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
 ```
 
@@ -171,49 +171,12 @@ Copy configs:
 
 ## Input
 
-Set mouse buttons config at `/etc/logid.cfg`:
+Open Solaar. In the `Key/Button Diversion` row select each button in turn
+and set it to `Diverted` instead of `Regular`:
 
-```js
-devices: ({
-  name: "MX Master 4";
-
-  smartshift: { on: false; };
-
-  hiresscroll: { hires: false; invert: false; target: false; };
-
-  buttons: (
-    {
-      cid: 0x53;  # Back
-      action: {
-        type: "Keypress";
-        keys: ["KEY_LEFTCTRL", "KEY_V"];
-      };
-    },
-    {
-      cid: 0x56;  # Forward
-      action: {
-        type: "Keypress";
-        keys: ["KEY_LEFTCTRL", "KEY_C"];
-      };
-    },
-    {
-      cid: 0x1a0;  # Thumb button
-      action: {
-        type: "Keypress";
-        keys: ["KEY_LEFTMETA"];
-      };
-    }
-  );
-});
-```
-
-Add `-c /etc/logid.cfg` to `Exec` field of `/usr/lib/systemd/system/logid.service`.
-
-Enable mouse extensions:
-
-```sh
-sudo systemctl enable --now logid
-```
+- Back Button
+- Forward Button
+- Haptic
 
 Install custom universal keyboard layouts:
 
