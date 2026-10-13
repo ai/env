@@ -136,7 +136,8 @@ if [ "$1" = "--up" ]; then
     container_id=$(get_container_id)
     $runtime exec -u 0 "$container_id" sh -c \
       "chown $username: /home/$username/.local /home/$username/.local/share /home/$username/.config 2>/dev/null || true"
-    $runtime exec -u "$username" -e HOME="/home/$username" "$container_id" sh -c \
+    $runtime exec -u "$username" -e HOME="/home/$username" \
+      -e SSH_AUTH_SOCK=/run/user/1000/gcr/ssh "$container_id" sh -c \
       "rm -rf ~/dotfiles && git clone $dotfiles_repo ~/dotfiles && cd ~/dotfiles && ./$dotfiles_cmd"
   fi
 
