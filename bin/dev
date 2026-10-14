@@ -130,6 +130,11 @@ if [ "$1" = "--up" ]; then
       "--mount" "type=bind,source=/home/ai/.local/share/pnpm/store,target=/home/$username/.local/share/pnpm/store"
     )
   fi
+  # Remove containers which failed to start, so Zed will not see duplicates
+  stale_ids=$($runtime ps -aq --filter "label=devcontainer.local_folder=$root" --filter status=created)
+  if [ -n "$stale_ids" ]; then
+    $runtime rm --force $stale_ids > /dev/null
+  fi
   ~/.local/lib/node/node_modules/.bin/devcontainer up "${devcontainer_args[@]}"
 
   if [ -z "$dockerfile_user" ]; then
