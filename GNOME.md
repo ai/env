@@ -30,7 +30,6 @@
 - [Overview on empty workspace](https://extensions.gnome.org/extension/8974/overview-on-empty-workspace/)
 - [Quick Settings Tweaks](https://extensions.gnome.org/extension/5446/quick-settings-tweaker/)
 - [Shotzy](https://extensions.gnome.org/extension/9707/shotzy/)
-- [System Monitor](https://extensions.gnome.org/extension/10372/system-monitor-panel/)
 - [Top Panel Workspace Scroll](https://extensions.gnome.org/extension/701/top-panel-workspace-scroll/)
 - [Translit Search](https://extensions.gnome.org/extension/10066/translit-search/)
 - [Tweaks & Extensions in System Menu](https://extensions.gnome.org/extension/1653/tweaks-in-system-menu/)
