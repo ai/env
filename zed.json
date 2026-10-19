@@ -1,4 +1,7 @@
 {
+  "debugger": {
+    "button": false
+  },
   "context_servers": {},
   "auto_install_extensions": {
     "adwaita-pastel": true,
@@ -20,9 +23,11 @@
   },
   "cli_default_open_behavior": "existing_window",
   "outline_panel": {
+    "button": false,
     "dock": "left"
   },
   "collaboration_panel": {
+    "button": false,
     "dock": "left"
   },
   "git_panel": {
@@ -31,10 +36,11 @@
   "project_panel": {
     "dock": "left"
   },
-  "diff_view_style": "split",
+  "diff_view_style": "unified",
   "agent_servers": {
     "codex-acp": {
       "default_config_options": {
+        "model": "gpt-6-sol",
         "reasoning_effort": "max"
       },
       "type": "registry"
@@ -86,7 +92,7 @@
   },
   "icon_theme": "Material Icon Theme",
   "terminal": {
-    "dock": "bottom",
+    "dock": "right",
     "bell": "system"
   },
   "soft_wrap": "preferred_line_length",

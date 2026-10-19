@@ -3,6 +3,9 @@
     "defaultMode": "auto"
   },
   "model": "opus",
+  "modelSettings": {
+    "claude-opus-5-5": {}
+  },
   "skipDangerousModePermissionPrompt": true,
   "theme": "auto",
   "preferredNotifChannel": "terminal_bell"
