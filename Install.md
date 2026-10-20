@@ -29,45 +29,17 @@ Start installer:
 
 1. Select English language.
 2. Use entire disk mode with encryption.
-
-Reboot to USB drive again. Mount laptop SSD.
-
-Open `etc/fstab`.
-
-Add `noatime,nodiratime` to root & home partitions.
-
-Move `/tmp` and `/var/tmp` to RAM:
-
-```
-vartmp /var/tmp tmpfs defaults,noatime,nodiratime 0 0
-vartmp /tmp     tmpfs defaults,noatime,nodiratime 0 0
-```
+3. Set host name to `savoia`.
 
 Reboot to BIOS. Block boot from USB.
 
 Reboot to system. Set Russian language, name to `Andrey Sitnik` and login `ai`.
 
-Set laptop name:
-
-```sh
-sudo hostnamectl set-hostname savoia
-```
-
-Reboot.
-
 Copy `Projects/` and `Документы/.Private/` from external SDD and open `Install.md` locally.
-
-Reduce swap usage by creating `/etc/sysctl.d/99-swappiness.conf` with:
-
-```
-vm.swappiness = 10
-```
 
 Enable `Performance`, disable `Automatic waiting saving` in Power settings.
 
 ### System Update
-
-Add `XKBLAYOUT="us"` in `/etc/vconsole.conf`.
 
 Remove unnecessary packages:
 
@@ -91,12 +63,10 @@ Install software:
 ```sh
 sudo dnf install --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release
 sudo dnf swap ffmpeg-free ffmpeg --allowerasing
-sudo dnf swap mesa-va-drivers mesa-va-drivers-freeworld
-sudo dnf swap mesa-vdpau-drivers mesa-vdpau-drivers-freeworld
 sudo dnf copr enable dusansimic/themes
 sudo dnf copr enable hyperreal/better_fonts
-sudo dnf install xclip micro fuse-encfs zenity borgbackup openssl ffmpegthumbnailer nss-tools mosquitto ydotool amrnb amrwb faac faad2 flac gstreamer1-libav gstreamer1-plugins-bad-freeworld gstreamer-ffmpeg gstreamer-plugins-bad-nonfree gstreamer-plugins-espeak gstreamer-plugins-ugly lame libdca libmad libmatroska x264 x265 xvidcore gstreamer1-plugins-bad-free gstreamer1-plugins-base gstreamer1-plugins-good gstreamer-plugins-bad gstreamer1-plugins-ugly-free mpv ffmpeg xorg-x11-drv-intel intel-media-driver webp-pixbuf-loader heif-pixbuf-loader avif-pixbuf-loader libheif-freeworld ffmpeg-libs libva libva-utils gstreamer1-vaapi mozilla-openh264 libheif-tools unrar p7zip p7zip-plugins speech-dispatcher speech-dispatcher-utils google-chrome-stable nodejs podman git tig ripgrep xkill bat make difftastic nextcloud-client zsh util-linux-user starship eza atuin sqlite  morewaita-icon-theme nethogs fuse-sshfs libgda libgda-sqlite playerctl cabextract xorg-x11-font-utils tesseract tesseract-devel zed podman-compose sgdisk tesseract-langpack-rus zbar android-tools mesa-va-drivers-freeworld vulkan-tools ollama-vulkan solaar
-sudo rpm -ivh --nodigest --nofiledigest https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
+sudo dnf install micro zenity borgbackup openssl ffmpegthumbnailer nss-tools flac gstreamer1-plugin-libav gstreamer1-plugins-bad-freeworld gstreamer1-plugins-ugly mesa-va-drivers-freeworld mpv libva-utils vulkan-tools webp-pixbuf-loader heif-pixbuf-loader avif-pixbuf-loader libheif-tools 7zip speech-dispatcher speech-dispatcher-utils nodejs26-bin podman git tig ripgrep bat make difftastic nextcloud-client zsh util-linux-user starship eza atuin sqlite nethogs fuse-sshfs playerctl cabextract tesseract tesseract-devel podman-compose gdisk tesseract-langpack-rus zbar android-tools solaar wl-clipboard xclip fuse-encfs libgda libgda-sqlite ollama-vulkan zed  morewaita-icon-theme google-chrome-stable cabextract xorg-x11-font-utils fontconfig
+sudo rpm -ivh --nosignature --nodigest --nofiledigest https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
 ```
 
 Set Flatpak languages:
@@ -118,12 +88,6 @@ Set `Ctrl + C` and `Ctrl + V` for copy/paste in new terminal settings.
 
 Add Autologin and fingers to user settings.
 
-Speed-up boot:
-
-```sh
-sudo systemctl disable NetworkManager-wait-online.service
-```
-
 Disable Software auto-update and notifications.
 
 Install `micro` and its plugins:
@@ -137,12 +101,6 @@ Disable waking up by mouse by creating `/etc/udev/rules.d/logitech-bolt.rules`:
 
 ```sh
 ACTION=="add", SUBSYSTEM=="usb", DRIVERS=="usb", ATTRS{idVendor}=="046d", ATTR{power/wakeup}="disabled"
-```
-
-Disable file system scanning:
-
-```sh
-dconf write /org/freedesktop/tracker/miner/files/crawling-interval -2
 ```
 
 ### Personal Files
@@ -234,6 +192,8 @@ borg umount ~/backup
 rmdir ~/backup
 ```
 
+Start Firefox and switch to your language.
+
 Start copying `Vídeos/*` from SDD.
 
 Set [color profile](https://www.notebookcheck.net/uploads/tx_nbc2/BOE0CB4.icm)
@@ -254,7 +214,7 @@ echo "CLAUDE_CONFIG_DIR=$HOME/.local/share/claude" >> ~/.config/environment.d/90
 
 Sign-in into accounts in Zed.
 
-Login to NextCloud client to `sync.sitnik.es`.
+Login to NextCloud client to `https://sync.sitnik.es`.
 
 Open Iotas app, log-in into Nextcloud account.
 
@@ -268,7 +228,7 @@ Install [Lilex](https://lilex.myrt.co).
 
 ```sh
 mkdir -p ~/.local/share/fonts
-# Copy variable fonts
+# Copy variable fonts to Lilex/
 fc-cache -f -v
 gsettings set org.gnome.desktop.interface monospace-font-name "Lilex 12"
 ```
@@ -295,7 +255,7 @@ Nautilus:
 
 - Enable Sort folders before files.
 - Enable Single click to open items.
-- Enable preview, search, file numbers for remote folders.
+- Enable preview and search for remote folders.
 
 Disable GNOME extension version check:
 
@@ -370,7 +330,7 @@ touch ~/.local/share/templates/Пустой\ файл
 Fix folders at `~/.config/user-dirs.dirs`:
 
 ```sh
-XDG_DESKTOP_DIR="$HOME/.local/share/desktop"
+XDG_DESKTOP_DIR="$HOME/Загрузки"
 XDG_DOWNLOAD_DIR="$HOME/Загрузки"
 XDG_TEMPLATES_DIR="$HOME/.local/share/templates"
 XDG_PUBLICSHARE_DIR="$HOME/.local/share/desktop"
@@ -378,6 +338,7 @@ XDG_DOCUMENTS_DIR="$HOME/Документы"
 XDG_MUSIC_DIR="$HOME"
 XDG_PICTURES_DIR="$HOME/Загрузки"
 XDG_VIDEOS_DIR="$HOME/Видео"
+XDG_PROJECTS_DIR="$HOME/Projects"
 ```
 
 Clean bookmarks:
@@ -386,10 +347,10 @@ Clean bookmarks:
 echo "" > ~/.config/gtk-3.0/bookmarks
 ```
 
-Remove unnecessary folders:
+Create nested folder:
 
 ```sh
-mkdir "Загрузки/Снимки экрана"
+mkdir ~/Загрузки/Снимки\ экрана
 ```
 
 Connect to server in Files by `sftp://ai@susedko.local/` and add `vault` to Favorites places. Add `Загрузки` and `Снимки экрана` to Favorites places.
@@ -403,12 +364,8 @@ Add icon theme:
 gsettings set org.gnome.desktop.interface icon-theme 'MoreWaita'
 ```
 
-Set icons:
-
-- `/usr/share/icons/MoreWaita/scalable/places/folder-code.svg`
-  for `~/Projects/`.
-- `/usr/share/icons/Adwaita/scalable/places/folder-pictures.svg`
-  for `~/Загрузки/Снимки экрана/`.
+Set icon `/usr/share/icons/Adwaita/scalable/places/folder-pictures.svg`
+for `~/Загрузки/Снимки экрана/`.
 
 ## Home Server
 
@@ -455,33 +412,16 @@ StartLimitBurst=5
 WantedBy=default.target
 ```
 
-Add service to `/etc/systemd/system/ydotoold.service`:
-
-```ini
-[Unit]
-Description=ydotool Daemon
-
-[Service]
-ExecStart=ydotoold --socket-path="/run/.ydotool_socket" --socket-own="1000:1000"
-Restart=on-failure
-RestartSec=30s
-
-[Install]
-WantedBy=default.target
-```
-
 Enable services:
 
 ```sh
-sudo systemctl enable ydotoold.service
-sudo systemctl start ydotoold.service
 systemctl --user enable domovoy-listener.service force-lock.service
 systemctl --user start domovoy-listener.service force-lock.service
 ```
 
 ### Development Tools
 
-Install [Zoom](https://zoom.us/download).
+Install [Zoom](https://www.zoom.com/download).
 
 Install Node.js, TypeScript, and Dev Containers.
 
