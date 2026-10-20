@@ -65,8 +65,10 @@
   "show_completions_on_input": true,
   "buffer_font_family": "Lilex",
   "agent": {
+    "threads_sidebar": {
+      "position": "left"
+    },
     "terminal_init_command": "claude",
-    "sidebar_side": "left",
     "dock": "left",
     "tool_permissions": {
       "default": "allow"
@@ -90,7 +92,11 @@
       "proxy_no_verify": null
     }
   },
-  "icon_theme": "Material Icon Theme",
+  "icon_theme": {
+    "mode": "system",
+    "light": "Material Icon Theme",
+    "dark": "Material Icon Theme"
+  },
   "terminal": {
     "dock": "right",
     "bell": "system"
