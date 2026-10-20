@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if grep -qsx 1 /sys/class/net/en*/carrier; then
+  home_ip=$(timeout 1 getent hosts domovoy.local | awk '{ print $1 }')
+  if [[ "$home_ip" == "192.168.50.180" ]]; then
+    source ~/Projects/env/secrets.env
+    curl -s \
+      -H "Authorization: Bearer $HA_TOKEN" \
+      -H "Content-Type: application/json" \
+      -d "{\"entity_id\": \"$2\"}" \
+      "https://domovoy.local/api/services/$1"
+    echo ""
+  fi
+fi

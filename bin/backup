@@ -7,7 +7,7 @@ NC='\033[0m'
 hour=$(date +"%H")
 if [[ hour -lt 9 || hour -ge 22 ]]; then
   echo -e "${TITLE}Подготовка кровати ко сну${GRAY}"
-  ~/Projects/env/bin/susedko script/turn_on script.heat_bedroom
+  ~/Projects/env/bin/domovoy script/turn_on script.heat_bedroom
   echo -e "${NC}\n"
 fi
 
