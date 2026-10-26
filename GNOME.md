@@ -13,7 +13,6 @@
 - [Blur my Shell](https://extensions.gnome.org/extension/3193/blur-my-shell/)
 - [Calendar Reminders](https://extensions.gnome.org/extension/10791/calendar-reminders/)
 - [Copyous](https://extensions.gnome.org/extension/8834/copyous/)
-- [Dim Completed Calendar Events](https://extensions.gnome.org/extension/5979/dim-completed-calendar-events/)
 - [Do Not Disturb While Screen Sharing Or Recording](https://extensions.gnome.org/extension/5985/do-not-disturb-while-screen-sharing-or-recording/)
 - [Dynamic Calendar, Clocks and Weather Icons ](https://extensions.gnome.org/extension/8640/dynamic-calendar-clocks-and-weather-icons-reborn/)
 - [Folder Search Provider](https://extensions.gnome.org/extension/8227/folder-search-provider/)
