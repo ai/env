@@ -104,7 +104,6 @@ if command -v eza > /dev/null 2>&1; then
   alias ls='eza'
 fi
 
-alias r='dev node --run'
 alias t='dev node --run test'
 alias pn='dev pnpm'
 alias pnx='dev sfw pnpm dlx'
@@ -172,11 +171,4 @@ else
 
   # Zed
   alias e='~/Projects/env/bin/zed-isolate .'
-
-  # Development
-  alias p='dev pnpm clean-publish --temp-dir .npm-release --without-publish \
-    && cd .npm-release \
-    && npm publish --access public \
-    && cd .. \
-    && rm -R  .npm-release'
 fi
