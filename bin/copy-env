@@ -12,7 +12,7 @@ if [ "$1" == "system" ]; then
   mkdir -p ~/.config/solaar/
   mkdir -p ~/.local/share/claude/
   rm -f ~/.zshrc
-  ln ~/Projects/env/zshrc ~/.zshrc
+  ln -s ~/Projects/env/zshrc ~/.zshrc
   cp ~/Projects/env/.oxfmtrc.json ~/.oxfmtrc.json
   cp ~/Projects/env/zed.json ~/.config/zed/settings.json
   cp ~/Projects/env/zed-keys.json ~/.config/zed/keymap.json
