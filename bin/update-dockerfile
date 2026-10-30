@@ -3,7 +3,20 @@
 DOCKERFILE_PATH="/home/ai/Projects/env/devcontainer/Dockerfile"
 PNPM_TAG_REGEX='^v[0-9]+\.[0-9]+\.[0-9]+$'
 
-latest_node=$(curl -s "https://nodejs.org/dist/index.json" | jq -r '.[0].version' | sed 's/v//')
+current_node=$(grep -oP 'NODE_VERSION=\K[^ \\]+' "$DOCKERFILE_PATH")
+
+# Allow -alpha/-beta/-rc only if we are already on pre-release
+if [[ "$current_node" == *-* ]]; then
+  NODE_VERSION_REGEX='^v[0-9]+\.[0-9]+\.[0-9]+'
+else
+  NODE_VERSION_REGEX='^v[0-9]+\.[0-9]+\.[0-9]+$'
+fi
+
+latest_node=$(curl -s "https://nodejs.org/dist/index.json" |
+  jq -r --arg regex "$NODE_VERSION_REGEX" '
+    [.[]? | .version | strings | select(test($regex))][0] // empty
+  ' |
+  sed 's/v//')
 latest_pnpm=$(curl -s "https://api.github.com/repos/pnpm/pnpm/releases?per_page=100" |
   jq -r --arg regex "$PNPM_TAG_REGEX" '
     .[]?
@@ -17,7 +30,6 @@ latest_pnpm=$(curl -s "https://api.github.com/repos/pnpm/pnpm/releases?per_page=
   sort -V |
   tail -n 1)
 
-current_node=$(grep -oP 'NODE_VERSION=\K[^ \\]+' "$DOCKERFILE_PATH")
 current_pnpm=$(grep -oP 'PNPM_VERSION=\K[^ \\]+' "$DOCKERFILE_PATH")
 current_pnpm_major=${current_pnpm%%.*}
 latest_pnpm_major=${latest_pnpm%%.*}
