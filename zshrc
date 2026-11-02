@@ -161,6 +161,9 @@ else
   alias node='dev node'
   alias multiocular='dev --port pnpm multiocular'
 
+  export OLLAMA_HOST=127.0.0.1:11435
+  export PATH="$HOME/.local/lib/ollama/bin/:$PATH"
+
   # Run git hooks inside Dev Container
   export GIT_CONFIG_PARAMETERS="'core.hooksPath=/home/ai/Projects/env/hooks-trap'"
 
