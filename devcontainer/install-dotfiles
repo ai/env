@@ -1,13 +1,13 @@
 #!/bin/sh
 
 MICRO_VERSION="2.0.15"
-DIFFT_VERSION="0.69.0"
+DIFFT_VERSION="0.72.0"
 BAT_VERSION="0.26.1"
-RG_VERSION="15.1.0"
-ATUIN_VERSION="18.16.1"
-STARSHIP_VERSION="1.25.1"
+RG_VERSION="15.2.0"
+ATUIN_VERSION="18.24.6"
+STARSHIP_VERSION="1.27.0"
 PNPM_COMPETITION_VERSION="0.5.5"
-SOCKET_FIREWALL_VERSION="1.12.0"
+SOCKET_FIREWALL_VERSION="1.16.0"
 
 ARCH=$(uname -m)
 echo "Detected architecture: $ARCH"
@@ -66,7 +66,7 @@ if ! cmd_exists micro; then
   else
     MICRO_ARCH="linux-arm64"
   fi
-  curl -sL https://github.com/zyedidia/micro/releases/download/v$MICRO_VERSION/micro-$MICRO_VERSION-$MICRO_ARCH.tar.gz | tar xz
+  curl -sL https://github.com/micro-editor/micro/releases/download/v$MICRO_VERSION/micro-$MICRO_VERSION-$MICRO_ARCH.tar.gz | tar xz
   mv micro-$MICRO_VERSION/micro ~/.local/bin
   chmod +x ~/.local/bin/micro
   rm -rf micro-$MICRO_VERSION
@@ -87,7 +87,7 @@ if ! cmd_exists eza; then
 fi
 
 if ! cmd_exists difft; then
-  curl -sL https://github.com/Wilfred/difftastic/releases/download/$DIFFT_VERSION/difft-$ARCH_SUFFIX.tar.gz | tar xz
+  curl -sL https://github.com/Wilfred/difftastic/releases/download/$DIFFT_VERSION/difft-$DIFFT_VERSION-$ARCH_SUFFIX.tar.gz | tar xz
   chmod +x difft
   mv difft ~/.local/bin
 fi
