@@ -1,34 +1,34 @@
-FROM registry.fedoraproject.org/fedora:44
+FROM registry.fedoraproject.org/fedora:45
 
 LABEL org.opencontainers.image.source=https://github.com/ai/env
 LABEL org.opencontainers.image.description="Development environment for JS open source projects"
 LABEL org.opencontainers.image.licenses=MIT
 
-RUN dnf install -yq zsh micro git gh tig make awk psmisc procps-ng curl \
+RUN dnf install -yq zsh micro git gh tig make gawk psmisc procps-ng curl \
   bind-utils iputils iproute libatomic nss dbus-libs atk at-spi2-atk cups-libs \
   libdrm libXcomposite libxkbcommon libXdamage libXrandr mesa-libgbm pango \
   alsa-lib jq which file lsof strace nmap-ncat \
   && dnf clean all \
   && rm -rf /var/cache/dnf
 
-ENV NODE_VERSION=26.13.0 \
+ENV NODE_VERSION=26.13.1 \
   PNPM_VERSION=12.19.0 \
-  NODE_24=24.19.0 \
-  NODE_22=22.22.3 \
-  DIFFT_VERSION=0.70.0 \
+  NODE_24=24.22.3 \
+  NODE_22=22.23.5 \
+  DIFFT_VERSION=0.72.0 \
   BAT_VERSION=0.26.1 \
   RG_VERSION=15.2.0 \
-  ATUIN_VERSION=18.19.0 \
-  STARSHIP_VERSION=1.26.0 \
+  ATUIN_VERSION=18.24.6 \
+  STARSHIP_VERSION=1.27.0 \
   PNPM_COMPLETION_VERSION=0.5.5 \
-  SOCKET_FIREWALL_VERSION=1.15.0
+  SOCKET_FIREWALL_VERSION=1.16.0
 
 ADD https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.gz /node.tar.xz
 ADD https://nodejs.org/dist/v${NODE_24}/node-v${NODE_24}-linux-x64.tar.gz /node24.tar.xz
 ADD https://nodejs.org/dist/v${NODE_22}/node-v${NODE_22}-linux-x64.tar.gz /node22.tar.xz
 ADD https://github.com/pnpm/pnpm/releases/download/v$PNPM_VERSION/pnpm-linux-x64.tar.gz /pnpm.tar.gz
 ADD https://github.com/eza-community/eza/releases/latest/download/eza_x86_64-unknown-linux-musl.tar.gz /eza.tar.gz
-ADD https://github.com/Wilfred/difftastic/releases/download/$DIFFT_VERSION/difft-x86_64-unknown-linux-musl.tar.gz /difft.tar.gz
+ADD https://github.com/Wilfred/difftastic/releases/download/$DIFFT_VERSION/difft-$DIFFT_VERSION-x86_64-unknown-linux-musl.tar.gz /difft.tar.gz
 ADD https://github.com/sharkdp/bat/releases/download/v$BAT_VERSION/bat-v$BAT_VERSION-x86_64-unknown-linux-musl.tar.gz /bat.tar.gz
 ADD https://github.com/BurntSushi/ripgrep/releases/download/$RG_VERSION/ripgrep-$RG_VERSION-x86_64-unknown-linux-musl.tar.gz /rg.tar.gz
 ADD https://github.com/atuinsh/atuin/releases/download/v$ATUIN_VERSION/atuin-x86_64-unknown-linux-musl.tar.gz /atuin.tar.gz
