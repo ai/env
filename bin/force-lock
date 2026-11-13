@@ -44,6 +44,11 @@ while true; do
         LOCK_DISABLED="true"
       fi
 
+      if pactl list sink-inputs | grep -qE 'media\.name = "Meet (-|–|—) '; then
+        log "Google Meet call, skipping lock"
+        LOCK_DISABLED="true"
+      fi
+
       if pactl list source-outputs | grep -q "Source Output #"; then
         log "Ongoing call, skipping lock"
         LOCK_DISABLED="true"
