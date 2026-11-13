@@ -37,6 +37,13 @@ while true; do
           LOCK_DISABLED="true"
           break
         fi
+
+        IS_X=$(echo "$URL" | grep -qE "(x|twitter)\.com/i/broadcasts/" && echo true)
+        if [ "$IS_X" = "true" ] && [ "$STATUS" = "Playing" ]; then
+          log "X broadcast playing, skipping lock"
+          LOCK_DISABLED="true"
+          break
+        fi
       done
 
       if pactl list sink-inputs | grep -qi "application\.name = \"mpv\""; then
