@@ -65,7 +65,7 @@ sudo dnf install --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/t
 sudo dnf swap ffmpeg-free ffmpeg --allowerasing
 sudo dnf copr enable dusansimic/themes
 sudo dnf copr enable hyperreal/better_fonts
-sudo dnf install micro zenity borgbackup openssl ffmpegthumbnailer nss-tools flac gstreamer1-plugin-libav gstreamer1-plugins-bad-freeworld gstreamer1-plugins-ugly mesa-va-drivers-freeworld mpv libva-utils vulkan-tools webp-pixbuf-loader heif-pixbuf-loader avif-pixbuf-loader libheif-tools 7zip speech-dispatcher speech-dispatcher-utils nodejs26-bin podman git tig ripgrep bat make difftastic nextcloud-client zsh util-linux-user starship eza atuin sqlite nethogs fuse-sshfs playerctl cabextract tesseract tesseract-devel podman-compose gdisk tesseract-langpack-rus zbar android-tools solaar wl-clipboard xclip fuse-encfs libgda libgda-sqlite zed  morewaita-icon-theme google-chrome-stable cabextract xorg-x11-font-utils fontconfig
+sudo dnf install micro zenity borgbackup openssl ffmpegthumbnailer nss-tools flac gstreamer1-plugin-libav gstreamer1-plugins-bad-freeworld gstreamer1-plugins-ugly mesa-va-drivers-freeworld mpv libva-utils vulkan-tools webp-pixbuf-loader heif-pixbuf-loader avif-pixbuf-loader libheif-tools 7zip speech-dispatcher speech-dispatcher-utils nodejs26-bin podman git tig ripgrep bat make difftastic nextcloud-client zsh util-linux-user starship eza atuin sqlite nethogs fuse-sshfs playerctl cabextract tesseract tesseract-devel podman-compose gdisk tesseract-langpack-rus zbar android-tools solaar wl-clipboard xclip fuse-encfs libgda libgda-sqlite zed  morewaita-icon-theme google-chrome-stable cabextract xorg-x11-font-utils fontconfig ydotool mosquitto
 sudo rpm -ivh --nosignature --nodigest --nofiledigest https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
 ```
 
@@ -404,9 +404,24 @@ Wants=network-online.target
 
 [Service]
 ExecStart=/home/ai/Projects/env/bin/domovoy-listener
-Restart=on-failure
+Restart=always
 RestartSec=30s
 StartLimitBurst=5
+
+[Install]
+WantedBy=default.target
+```
+
+Add service to `/etc/systemd/system/ydotoold.service`:
+
+```ini
+[Unit]
+Description=ydotool Daemon
+
+[Service]
+ExecStart=ydotoold --socket-path="/run/.ydotool_socket" --socket-own="1000:1000"
+Restart=on-failure
+RestartSec=30s
 
 [Install]
 WantedBy=default.target
@@ -415,6 +430,8 @@ WantedBy=default.target
 Enable services:
 
 ```sh
+sudo systemctl enable ydotoold.service
+sudo systemctl start ydotoold.service
 systemctl --user enable domovoy-listener.service force-lock.service
 systemctl --user start domovoy-listener.service force-lock.service
 ```
