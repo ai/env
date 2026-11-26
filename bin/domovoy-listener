@@ -2,7 +2,7 @@
 
 source ~/Projects/domovoy/.env
 
-mosquitto_sub -h "$MQTT_SERVER" -t ai_laptop -u "$MQTT_USER" -P "$MQTT_PASSWORD" | while read -r payload
+mosquitto_sub -R -h "$MQTT_SERVER" -t ai_laptop -u "$MQTT_USER" -P "$MQTT_PASSWORD" | while read -r payload
 do
   if nmcli -t -f TYPE,STATE device | grep -q "^ethernet:connected"; then
     echo "Received: $payload"
